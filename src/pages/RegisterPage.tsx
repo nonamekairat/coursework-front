@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
 import {Card, CardBody, CardFooter, CardHeader, Typography,} from "@material-tailwind/react";
-import FormInput from '../components/UI/FormInput';
+import FormInput from '../components/UI/input/FormInput';
 import {IRegister} from "../models/user/IRegister";
 import {IInput} from "../models/form/IInput";
 import {userAPI} from "../services/UserService";
 import {IToken} from "../models/IToken";
 import {useAppDispatch} from "../hooks/redux";
 import {tokenSlice} from "../store/reducers/TokenSlice";
-import MyButton from "../components/UI/MyButton";
+import MyButton from "../components/UI/button/MyButton";
 
 // interface IRegisterValue extends IRegister {
 //     confirmPassword: string;
@@ -171,7 +171,6 @@ const RegisterPage = () => {
                                 key={input.id}
                                 inputProps={input}
                                 errorMessage={errors[input.name]}
-                                value={values[input.name]}
                                 onChange={onChange}/>
                         ))
                     }

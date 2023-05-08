@@ -14,7 +14,7 @@ export const userAPI = createApi({
         {
             baseUrl: API_URL + "/api",
             prepareHeaders: (headers, {getState}) => {
-                const token = (getState() as RootState).tokenReducer.token;
+                const token = (getState() as RootState).tokenReducer.accessToken;
                 console.log(token);
                 // const {token} = useAppSelector(state => state.tokenReducer)
                 // If we have a token set in state, let's assume that we should be passing it.
@@ -39,7 +39,7 @@ export const userAPI = createApi({
         }),
         authenticateUser: build.mutation<IToken, IAuthenticate>({
             query: (user) => ({
-                url: `/auth/authenticate`,
+                url: `/auth/login`,
                 method: 'POST',
                 body: user
             }),
@@ -48,7 +48,7 @@ export const userAPI = createApi({
 
         fetchUser: build.query<IUser, null>({
             query: () => ({
-                url: `/users/getUser`,
+                url: `/users/myInfo`,
                 method: 'GET'
             }),
             providesTags: result => ['User']

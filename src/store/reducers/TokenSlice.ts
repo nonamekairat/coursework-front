@@ -1,12 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IToken} from "../../models/IToken";
 
-interface TokenState {
-    token: string | null;
-}
 
-const initialState: TokenState = {
-    token: null
+
+const initialState: IToken = {
+    accessToken: "",
+    refreshToken: ""
 }
 // todo: store token in localStorage or somewhere else
 
@@ -16,10 +15,12 @@ export const tokenSlice = createSlice({
     reducers: {
 
         tokenSet(state, action: PayloadAction<IToken>) {
-            state.token = action.payload.token;
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
         },
         tokenRemove(state) {
-            state.token = null;
+            state.accessToken = "";
+            state.refreshToken = "";
         },
 
     },
