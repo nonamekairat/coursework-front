@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import classes from "./MyNavbar.module.css";
+import avatar from '../../../assets/avatar.png';
 import {
     Navbar,
     MobileNav,
@@ -30,6 +31,8 @@ import {
 import {Link, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {tokenSlice} from "../../../store/reducers/TokenSlice";
+import {userAPI} from "../../../services/UserService";
+import StandartButton from "../button/StandartButton";
 
 // profile menu component
 
@@ -38,8 +41,9 @@ function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const closeMenu = () => setIsMenuOpen(false);
     const navigate = useNavigate();
-    const {token} = useAppSelector(state => state.tokenReducer)
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
     const dispatch = useAppDispatch();
+    const {data: user, error, isLoading, refetch} = userAPI.useFetchUserQuery(null);
 
 
     // todo: create pages for links
@@ -55,9 +59,9 @@ function ProfileMenu() {
             onClick: () => navigate("/about"),
         },
         {
-            label: "Inbox",
+            label: "My Orders",
             icon: InboxArrowDownIcon,
-            onClick: () => navigate("/about"),
+            onClick: () => navigate("/my_orders"),
         },
         {
             label: "Help",
@@ -76,13 +80,17 @@ function ProfileMenu() {
     const logout = () => {
         dispatch(tokenSlice.actions.tokenRemove());
     }
+    const toLogin = () => {
+        navigate("/login");
+    }
 
-    if(!token){
+    if(!accessToken){
+
         return (
 
-            <Button variant="gradient" size="sm" className={classes.msAuto}>
-                <Link to="/login">login</Link>
-            </Button>
+            <StandartButton className={classes.msAuto} onClick={toLogin}>
+                Login
+            </StandartButton>
 
         )
     }
@@ -101,7 +109,10 @@ function ProfileMenu() {
                         size="sm"
                         alt="candice wu"
                         className="border border-blue-500 p-0.5"
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                        src={
+
+                                user?.imageUrl ? user?.imageUrl : avatar
+                    }
                     />
                     <ChevronDownIcon
                         strokeWidth={2.5}
@@ -233,37 +244,37 @@ function NavListMenu() {
 // nav list component
 const navListItems = [
     {
-        label: "Account",
+        label: "Cart",
         icon: UserCircleIcon,
+        href: '#'
     },
     {
-        label: "Blocks",
+        label: "Favorites",
         icon: CubeTransparentIcon,
+        href: '#'
     },
     {
-        label: "Docs",
+        label: "CreateLaptop",
         icon: CodeBracketSquareIcon,
+        href: '/laptop/create'
+    },
+    {
+        label: "Cart",
+        icon: CodeBracketSquareIcon,
+        href: '/cart'
     },
 ];
 
-function NavList() {
+const NavList = () => {
     return (
         <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
             <NavListMenu />
-            {navListItems.map(({ label, icon }, key) => (
-                <Typography
-                    key={label}
-                    as="a"
-                    href="#"
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                >
+            {navListItems.map(({ label, icon, href}, key) => (
+
                     <MenuItem className="flex items-center gap-2 lg:rounded-full">
                         {React.createElement(icon, { className: "h-[18px] w-[18px]" })}{" "}
-                        {label}
+                        <Link to={href}>{label}</Link>
                     </MenuItem>
-                </Typography>
             ))}
         </ul>
     );

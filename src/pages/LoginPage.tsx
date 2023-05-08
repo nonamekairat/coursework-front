@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
 import {Alert, Card, CardBody, CardFooter, CardHeader, Checkbox, Typography,} from "@material-tailwind/react";
-import FormInput from "../components/UI/FormInput";
-import MyButton from "../components/UI/MyButton";
+import FormInput from "../components/UI/input/FormInput";
+import MyButton from "../components/UI/button/MyButton";
 import {useAppDispatch} from "../hooks/redux";
 import {userAPI} from "../services/UserService";
 import {IAuthenticate} from "../models/user/IAuthenticate";
@@ -53,7 +53,8 @@ const Login = () => {
         await authenticate(values as unknown as IAuthenticate).unwrap()
             .then((token: IToken) => {
                 dispatch(tokenSlice.actions.tokenSet(token))
-                navigate("/")}
+                navigate("/")
+            }
             ).catch((response:any) => {
                 setisError(false);
                 if(response.status == 403) setisError(true);
@@ -89,7 +90,6 @@ const Login = () => {
                                 key={input.id}
                                 inputProps={input}
                                 errorMessage={""} // todo: remake
-                                value={values[input.name]}
                                 onChange={onChange}
                             />
                         ))
