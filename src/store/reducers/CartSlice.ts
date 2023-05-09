@@ -30,6 +30,10 @@ export const cartSlice = createSlice({
             }
             state.laptops = newLaptops;
         },
+        clearCart(state) {
+            state.laptops = [];
+            state.total = 0;
+        },
     },
 })
 

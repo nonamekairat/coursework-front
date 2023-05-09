@@ -1,15 +1,10 @@
 import React, {FC, useState} from 'react';
 import MySelect from "./MySelect";
 import {IOption} from "../../../models/form/IOption";
-import {IBrand, IBrandRequest, IHardware, IHardwareRequest} from "../../../models/ILaptop";
+import {IBrand, IBrandRequest, IHardware} from "../../../models/ILaptop";
 
-import {
-    PlusIcon,
-    MinusIcon
-} from "@heroicons/react/24/outline";
+import {MinusIcon, PlusIcon} from "@heroicons/react/24/outline";
 import {Input} from "@material-tailwind/react";
-import {userAPI} from "../../../services/UserService";
-import {hardwareAPI} from "../../../services/HardwareService";
 import StandartButton from "../button/StandartButton";
 import {brandAPI} from "../../../services/BrandService";
 

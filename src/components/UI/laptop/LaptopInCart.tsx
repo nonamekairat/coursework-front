@@ -1,8 +1,7 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import imageNotFound from "../../../assets/image-not-found.png";
 import {ICartLaptop} from "../../../models/ILaptop";
-import Counter from "../counter/Counter";
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
+import {useAppDispatch} from "../../../hooks/redux";
 import {cartSlice} from "../../../store/reducers/CartSlice";
 import {Button} from "@material-tailwind/react";
 
@@ -44,7 +43,7 @@ const LaptopInCart:FC<LaptopInCartProps> = ({cartLaptop}) => {
 
                         <div className="ps-3 flex flex-col space-y-3 w-full">
                             <div>
-                                {laptop.name}
+                                {laptop.name} {laptop.brand}
                             </div>
                             <div>
                                 {laptop.price} сом

@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_URL} from "../util/Constants";
 import {RootState} from "../store/store";
-import {IFavorite, IFavoriteRequest, IReview, IReviewRequest} from "../models/ILaptop";
+import {IReview, IReviewRequest} from "../models/ILaptop";
 
 
 export const reviewAPI = createApi({

@@ -1,9 +1,5 @@
 import {FC, Fragment, useState} from "react";
-import {
-    Accordion,
-    AccordionHeader,
-    AccordionBody,
-} from "@material-tailwind/react";
+import {Accordion, AccordionBody, AccordionHeader,} from "@material-tailwind/react";
 
 interface IIconProps {
     id: any;

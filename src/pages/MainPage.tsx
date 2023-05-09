@@ -1,24 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useAppSelector} from "../hooks/redux";
+import React, {useEffect, useState} from 'react';
 import {laptopAPI} from "../services/LaptopService";
-import {Card, CardBody, CardFooter, CardHeader, Typography} from "@material-tailwind/react";
-import imageNotFound from "../assets/image-not-found.png";
 import {typesAPI} from "../services/TypesService";
 import {types} from "../util/Constants";
-import Example from "../components/UI/accordion/Example";
 import {hardwareAPI} from "../services/HardwareService";
 import HardwareTypeAccordion from "../components/UI/accordion/HardwareTypeAccordion";
 import StandartButton from "../components/UI/button/StandartButton";
-import {IHardware, ILaptop} from "../models/ILaptop";
-import {useObserver} from "../hooks/useObserver";
+import {ILaptop} from "../models/ILaptop";
 import {IPageable} from "../models/IPageable";
 import LaptopItem from "../components/UI/laptop/LaptopItem";
 import PaginationList from "../components/UI/pagination/PaginationList";
 
 
 const MainPage = () => {
-    const {accessToken} = useAppSelector(state => state.tokenReducer);
-    // const {data: laptops, isLoading: isLaptopsLoading} = laptopAPI.useFetchAllLaptopsQuery(null); //todo: add pagination
     const [localLaptops, setLocalLaptops] = useState<ILaptop[]>();
     const {data: hardwareTypes} = typesAPI.useFetchTypesQuery(types.hardwareType);
     const {data: hardwareList} = hardwareAPI.useFetchAllHardwareQuery(null);
@@ -112,7 +105,6 @@ const MainPage = () => {
         if(pageLaptop){
             for (let i = 0; i < checkedHardwareList.length; i++) {
                 for (let j = 0; j < pageLaptop.content.length; j++) {
-                    console.log(haveHardware(pageLaptop.content[j], checkedHardwareList[i]))
                     if(haveHardware(pageLaptop.content[j], checkedHardwareList[i]) && !newLaptops.includes(pageLaptop.content[j])){
                         newLaptops = [...newLaptops, pageLaptop.content[j]];
                     }

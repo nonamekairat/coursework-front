@@ -5,7 +5,6 @@ import imageNotFound from "../../../assets/image-not-found.png";
 import StandartButton from "../button/StandartButton";
 import {useNavigate} from "react-router-dom";
 import {getModel} from "../../../util/Functions";
-import {brandAPI} from "../../../services/BrandService";
 
 interface LaptopItemProps {
     laptop: ILaptop;

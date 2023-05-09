@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
-import {Button} from "@material-tailwind/react";
-import {useAppSelector} from "./hooks/redux";
 import LoginPage from "./pages/LoginPage";
 import MyNavbar from "./components/UI/navbar/MyNavbar";
 import MainPage from "./pages/MainPage";
@@ -14,7 +12,8 @@ import LaptopPage from "./pages/LaptopPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CartPage from "./pages/CartPage";
 import FavoritesPage from "./pages/FavoritesPage";
-import './App.css';
+import MessagePage from "./pages/MessagePage";
+
 const App = () => {
 
 
@@ -33,7 +32,7 @@ const App = () => {
               <Route path={'/profile/change'} element={<ProfileChangePage/>}/>
               <Route path={'/laptop/create'} element={<CreateLaptopPage/>}/>
               <Route path={'/login'} element={<LoginPage/>}/>
-              <Route path="*" element={<NotFoundPage/>}/>
+              <Route path="*" element={<MessagePage/>}/>
           </Routes>
 
       </BrowserRouter>

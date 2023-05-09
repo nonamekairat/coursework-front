@@ -1,8 +1,6 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import userReducer from './reducers/UserSlice';
 import tokenReducer from './reducers/TokenSlice';
 import cartReducer from './reducers/CartSlice';
-import {postAPI} from "../services/PostService";
 import {userAPI} from "../services/UserService";
 import {typesAPI} from "../services/TypesService";
 import {brandAPI} from "../services/BrandService";
@@ -11,22 +9,14 @@ import {laptopAPI} from "../services/LaptopService";
 import {imageAPI} from "../services/ImageService";
 import {favoriteAPI} from "../services/FavoriteService";
 import {reviewAPI} from "../services/ReviewService";
-import {persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import {FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE,} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import {orderAPI} from "../services/OrderService"; // defaults to localStorage for web
 
 
 const rootReducer = combineReducers({
-    userReducer,
     tokenReducer,
     cartReducer,
-    [postAPI.reducerPath]: postAPI.reducer,
     [userAPI.reducerPath]: userAPI.reducer,
     [typesAPI.reducerPath]: typesAPI.reducer,
     [brandAPI.reducerPath]: brandAPI.reducer,
@@ -35,6 +25,7 @@ const rootReducer = combineReducers({
     [imageAPI.reducerPath]: imageAPI.reducer,
     [favoriteAPI.reducerPath]: favoriteAPI.reducer,
     [reviewAPI.reducerPath]: reviewAPI.reducer,
+    [orderAPI.reducerPath]: orderAPI.reducer,
 })
 
 const persistConfig = {
@@ -53,7 +44,6 @@ export const setupStore = () => {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         })
-            .concat(postAPI.middleware)
             .concat(userAPI.middleware)
             .concat(brandAPI.middleware)
             .concat(hardwareAPI.middleware)
@@ -61,6 +51,7 @@ export const setupStore = () => {
             .concat(imageAPI.middleware)
             .concat(favoriteAPI.middleware)
             .concat(reviewAPI.middleware)
+            .concat(orderAPI.middleware)
             .concat(typesAPI.middleware),
     })
 }

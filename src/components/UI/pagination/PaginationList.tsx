@@ -50,7 +50,7 @@ const PaginationList:FC<PaginationListProps> = ({active, setActive, total}) => {
                 <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
             </Button>
             <div className="flex items-center gap-2">
-                {getTotalList().map(value => <IconButton {...getItemProps(value)}>{value}</IconButton>)}
+                {getTotalList().map(value => <IconButton key={value} {...getItemProps(value)}>{value}</IconButton>)}
 
                 {/*<IconButton {...getItemProps(2)}>2</IconButton>*/}
                 {/*<IconButton {...getItemProps(3)}>3</IconButton>*/}

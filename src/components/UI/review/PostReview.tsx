@@ -4,7 +4,6 @@ import {Rating} from "react-simple-star-rating";
 import '../../../App.css';
 import {Textarea} from "@material-tailwind/react";
 import StandartButton from "../button/StandartButton";
-import {laptopAPI} from "../../../services/LaptopService";
 import {reviewAPI} from "../../../services/ReviewService";
 
 interface PostReview {

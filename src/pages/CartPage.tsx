@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useAppSelector} from "../hooks/redux";
-import LaptopItem from "../components/UI/laptop/LaptopItem";
 import LaptopInCart from "../components/UI/laptop/LaptopInCart";
 import {ICartLaptop, ILaptop} from "../models/ILaptop";
+import MessagePage from "./MessagePage";
+import CartOrder from "../components/UI/order/CartOrder";
 
 
 const CartPage = () => {
@@ -30,21 +31,19 @@ const CartPage = () => {
     }
 
     if(laptops.length === 0){
-        return (<div>
-            <div className="p-3 mx-auto mt-20 text-3xl mb-5 text-center bg-gray-300 w-6/12">У вас пока нету ноутбуков в корзине</div>
-        </div>)
+        return (<MessagePage message="У вас пока нету ноутбуков в корзине" />)
     }
-    // console.log(laptops);
 
     return (
         <div className="px-3 mx-auto mt-20">
-            <div className="text-3xl mb-5">Ноутбуки в вашей корзине</div>
-            <div className="flex">
+
+            <div className="flex justify-between">
                 <div className="w-5/12">
+                    <div className="text-3xl mb-5">Ноутбуки в вашей корзине</div>
                     {laptopCounts && laptopCounts.map(laptop => <LaptopInCart key={laptop.laptop.id} cartLaptop={laptop}/>)}
                 </div>
-                <div className="w-7/12">
-
+                <div className="w-6/12 me-4">
+                    <CartOrder laptops={laptops} />
                 </div>
             </div>
         </div>

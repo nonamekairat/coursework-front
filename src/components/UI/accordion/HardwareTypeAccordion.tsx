@@ -1,11 +1,6 @@
 import React, {FC, Fragment, useState} from "react";
-import {
-    Accordion,
-    AccordionHeader,
-    AccordionBody, Checkbox,
-} from "@material-tailwind/react";
+import {Accordion, AccordionBody, AccordionHeader, Checkbox,} from "@material-tailwind/react";
 import {IHardware} from "../../../models/ILaptop";
-import {Check} from "heroicons-react";
 
 interface IIconProps {
     id: any;

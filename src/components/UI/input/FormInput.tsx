@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
-import { Input, } from "@material-tailwind/react";
-import {IPost} from "../../../models/IPost";
+import {Input,} from "@material-tailwind/react";
 import {IInput} from "../../../models/form/IInput";
 
 interface FormInputProps {

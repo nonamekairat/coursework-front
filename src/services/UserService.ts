@@ -5,7 +5,6 @@ import {IRegister} from "../models/user/IRegister";
 import {IAuthenticate} from "../models/user/IAuthenticate";
 import {IUser} from "../models/user/IUser";
 import {RootState} from "../store/store";
-import {IPost} from "../models/IPost";
 
 
 export const userAPI = createApi({
@@ -15,13 +14,13 @@ export const userAPI = createApi({
             baseUrl: API_URL + "/api",
             prepareHeaders: (headers, {getState}) => {
                 const token = (getState() as RootState).tokenReducer.accessToken;
-                console.log(token);
+                // console.log(token);
                 // const {token} = useAppSelector(state => state.tokenReducer)
                 // If we have a token set in state, let's assume that we should be passing it.
                 if (token) {
                     headers.set('Authorization', `Bearer ${token}`)
                 }
-                console.log(headers);
+                // console.log(headers);
                 return headers
             },
         }),

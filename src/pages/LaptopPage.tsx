@@ -4,18 +4,11 @@ import {IFavoriteRequest, IHardware, ILaptop} from "../models/ILaptop";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {laptopAPI} from "../services/LaptopService";
 import NotFoundPage from "./NotFoundPage";
-import LaptopItem from "../components/UI/laptop/LaptopItem";
-import {typesAPI} from "../services/TypesService";
-import {types} from "../util/Constants";
 import {getModel, hardwareTypeList} from "../util/Functions";
 import imageNotFound from "../assets/image-not-found.png";
-import {brandAPI} from "../services/BrandService";
-import StandartButton from "../components/UI/button/StandartButton";
 import AddToFavoriteButton from "../components/UI/button/AddToFavoriteButton";
 import {favoriteAPI} from "../services/FavoriteService";
-import ReviewView from "../components/UI/review/ReviewView";
 import ReviewContainer from "../components/UI/review/ReviewContainer";
-import PostReview from "../components/UI/review/PostReview";
 import AuthorizedComponent from "../components/AuthorizedComponent";
 import OrderComponent from "../components/UI/order/OrderComponent";
 import {Rating} from "react-simple-star-rating";
@@ -197,7 +190,7 @@ const LaptopPage = () => {
                     {/*todo: make rating looking*/}
 
                 </div>
-                <div className="w-3/12 bg-amber-200 p-2">
+                <div className="w-3/12 p-3">
 
                     <OrderComponent laptop={laptop}/>
 

@@ -2,8 +2,6 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_URL} from "../util/Constants";
 import {RootState} from "../store/store";
 import {IHardware, IHardwareRequest} from "../models/ILaptop";
-import {IToken} from "../models/IToken";
-import {IAuthenticate} from "../models/user/IAuthenticate";
 
 
 export const hardwareAPI = createApi({

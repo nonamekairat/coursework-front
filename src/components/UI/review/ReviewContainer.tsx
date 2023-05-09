@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {laptopAPI} from "../../../services/LaptopService";
 import ReviewView from "./ReviewView";
 import {userAPI} from "../../../services/UserService";
 import PostReview from "./PostReview";
@@ -63,8 +62,8 @@ const ReviewContainer:FC<ReviewContainerProps> = ({laptopId}) => {
                     </div>
                     {(reviews && reviews.length !== 0) ?
                         reviews.map((review) =>
-                            <div className="mb-8">
-                                <ReviewView key={review.id} review={review}/>
+                            <div className="mb-8" key={review.id}>
+                                <ReviewView  review={review}/>
                             </div>
 
                         ) : <div className="text-xl">На этот ноутбук еще нету рецензий. Будьте первым кто оставит свой комментарий!</div>

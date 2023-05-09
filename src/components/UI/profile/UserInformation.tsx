@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {IUser} from "../../../models/user/IUser";
-import MyButton from "../button/MyButton";
 import {useNavigate} from "react-router-dom";
 import StandartButton from "../button/StandartButton";
 import avatar from "../../../assets/avatar.png";

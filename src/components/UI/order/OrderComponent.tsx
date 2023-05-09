@@ -28,16 +28,16 @@ const OrderComponent:FC<OrderComponentProps> = ({laptop}) => {
     }
 
     return (
-        <div className="border-2 rounded-3xl h-96">
-            <div className="p-4">
+        <div className="border-4 rounded-3xl h-96">
+            <div className="p-6">
                 <div className="text-3xl mb-8">
                     {laptop.price} сом
                 </div>
                 {laptop.amount === 1 ?
-                    <div className="text-red-700">*на складе осталось только 1 ноутбук этой модели</div>
+                    <div className="text-red-700 mb-3">*на складе остался только 1 ноутбук этой модели</div>
                     :
                     laptop.amount === 0 ?
-                        <div className="text-red-700">*на складе не осталось ноутбуков этой модели</div>
+                        <div className="text-red-700 mb-3">*на складе не осталось ноутбуков этой модели</div>
                         :
                         <div></div>
                 }

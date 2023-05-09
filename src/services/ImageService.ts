@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_URL} from "../util/Constants";
 import {RootState} from "../store/store";
-import {IBrand, IBrandRequest, ICreateLaptop, ILaptop} from "../models/ILaptop";
 
 
 export const imageAPI = createApi({

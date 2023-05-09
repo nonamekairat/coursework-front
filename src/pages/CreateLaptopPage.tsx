@@ -14,7 +14,6 @@ import SelectBrand from "../components/UI/select/SelectBrand";
 import {Textarea} from "@material-tailwind/react";
 import StandartButton from "../components/UI/button/StandartButton";
 import {laptopAPI} from "../services/LaptopService";
-import {upload} from "@testing-library/user-event/dist/upload";
 import {imageAPI} from "../services/ImageService";
 
 

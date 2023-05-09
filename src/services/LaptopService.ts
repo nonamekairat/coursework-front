@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_URL} from "../util/Constants";
 import {RootState} from "../store/store";
-import {IBrand, IBrandRequest, ICreateLaptop, ILaptop, IPageLaptop, IReview} from "../models/ILaptop";
+import {ICreateLaptop, ILaptop, IPageLaptop} from "../models/ILaptop";
 import {IPageable} from "../models/IPageable";
 
 

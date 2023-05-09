@@ -1,5 +1,4 @@
 import React from 'react';
-import {postAPI} from "../services/PostService";
 import {userAPI} from "../services/UserService";
 import UserInformation from "../components/UI/profile/UserInformation";
 
