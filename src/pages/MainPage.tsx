@@ -13,6 +13,7 @@ import {IHardware, ILaptop} from "../models/ILaptop";
 import {useObserver} from "../hooks/useObserver";
 import {IPageable} from "../models/IPageable";
 import LaptopItem from "../components/UI/laptop/LaptopItem";
+import PaginationList from "../components/UI/pagination/PaginationList";
 
 
 const MainPage = () => {
@@ -24,32 +25,27 @@ const MainPage = () => {
     const [checkedHardwareList, setCheckedHardwareList] = useState<string[]>([]);
 
     const [totalPage, setTotalPages] = useState(0);
-    const [size, setSize] = useState(10);
-    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(12);
+    const [page, setPage] = useState(1);
 
     const {data: pageLaptop, isLoading: isLaptopsLoading, refetch} = laptopAPI.useFetchAllPaginationLaptopsQuery({
-        page: page,
+        page: page - 1,
         size: size,
         sort: [
             "id,asc"
         ]
     } as IPageable);
 
-    const changePage = ((n: number) => {
-        if(page == totalPage - 1 && n > 0) return;
-        if(page == 0 && n < 0) return;
-        setPage(page + n);
-    })
 
     useEffect(() => {
         refetch();
 
-        console.log('refetching is causing');
+        // console.log('refetching is causing');
     }, [page, size])
 
 
     useEffect(() => {
-        console.log("fetching is causing");
+        // console.log("fetching is causing");
 
         if(pageLaptop && pageLaptop.content) {
             setTotalPages(pageLaptop.totalPages);
@@ -58,17 +54,17 @@ const MainPage = () => {
         if(checkedHardwareList.length !== 0){
             filterLaptops();
         }
-        console.log(pageLaptop?.content)
+        // console.log(pageLaptop?.content)
     }, [pageLaptop])
 
     useEffect(() => {
-        console.log(localLaptops);
+        // console.log(localLaptops);
     }, [localLaptops])
 
 
     const selectHardware = (e: any) => {
-        console.log(e.target.value)
-        console.log(e.target.checked)
+        // console.log(e.target.value)
+        // console.log(e.target.checked)
         const checked = e.target.checked;
         const value = e.target.value;
         if(checked && hardwareList){
@@ -123,14 +119,14 @@ const MainPage = () => {
                 }
             }
         }
-        console.log(newLaptops);
+        // console.log(newLaptops);
         setLocalLaptops(newLaptops);
     }
 
     return (
         <div className="px-3 mx-auto mt-20">
             <div className="flex">
-                <div className="w-3/12 bg-amber-500">
+                <div className="w-3/12">
 
                     {hardwareTypes &&
                         hardwareTypes.map(hardwareType =>
@@ -147,15 +143,14 @@ const MainPage = () => {
 
 
                 </div>
-                <div className="w-full bg-amber-300 p-3">
+                <div className="w-full p-3">
                     <div className="grid grid-cols-3 gap-2 gap-y-5">
                         {pageLaptop &&
                             pageLaptop.content.map(laptop => <LaptopItem key={laptop.id} laptop={laptop}/>)
                         }
                     </div>
-                    <div className="flex">
-                        <StandartButton onClick={() => changePage(-1)}>previous page</StandartButton>
-                        <StandartButton onClick={() => changePage(1)}>next page</StandartButton>
+                    <div className="mt-6">
+                        <PaginationList total={totalPage} active={page} setActive={setPage} />
                     </div>
                     {/*<div ref={lastElement} style={{height:20, background: 'red'}}/>*/}
                 </div>

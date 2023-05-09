@@ -48,6 +48,15 @@ export const laptopAPI = createApi({
             }),
             providesTags: result => ['Laptop']
         }),
+        fetchAllBySearch: build.query<ILaptop[], string>({
+            query: (query) => ({
+                url: `/laptops/search`,
+                method: 'GET',
+                params: {
+                    query: query
+                }
+            }),
+        }),
 
         createLaptop: build.mutation<ILaptop, ICreateLaptop>({
             query: (brand) => ({

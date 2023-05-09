@@ -13,7 +13,8 @@ import CreateLaptopPage from "./pages/CreateLaptopPage";
 import LaptopPage from "./pages/LaptopPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CartPage from "./pages/CartPage";
-
+import FavoritesPage from "./pages/FavoritesPage";
+import './App.css';
 const App = () => {
 
 
@@ -26,6 +27,7 @@ const App = () => {
               <Route path={'/register'} element={<RegisterPage/>}/>
               <Route path={'/'} element={<MainPage/>}/>
               <Route path={'/cart'} element={<CartPage/>}/>
+              <Route path={'/favorites'} element={<FavoritesPage/>}/>
               <Route path={'/laptops/:id'} key="'/laptops/:id" element={<LaptopPage />}/>
               <Route path={'/profile'} element={<ProfilePage/>}/>
               <Route path={'/profile/change'} element={<ProfileChangePage/>}/>

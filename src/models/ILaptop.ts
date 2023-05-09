@@ -7,13 +7,20 @@ export interface ILaptop {
     price: number;
     amount: number;
     discount: number;
-    brandId: number;
+    brand: string;
     category: string;
     guarantee: number;
     imageUrl: string;
     averageScore: number;
     hardwareList: IHardware[];
 }
+export interface ICartLaptop{
+    laptop: ILaptop,
+    count: number,
+}
+
+
+
 export interface IPageLaptop {
     content: ILaptop[];
     totalElements: number;

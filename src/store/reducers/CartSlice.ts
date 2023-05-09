@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {ILaptop} from "../../models/ILaptop";
+import {stat} from "fs";
 
 interface ICart {
     laptops: ILaptop[];
@@ -20,13 +21,15 @@ export const cartSlice = createSlice({
             state.total = state.total + 1;
         },
         removeFromCart(state, action: PayloadAction<ILaptop>) {
-            const index = state.laptops.indexOf(action.payload);
-            if (index > -1) {
-                state.laptops.splice(index, 1);
+            const newLaptops = state.laptops;
+            for (let i = 0; i < newLaptops.length; i++) {
+                if(newLaptops[i].id === action.payload.id){
+                    newLaptops.splice(i, 1);
+                    state.total = state.total - 1;
+                }
             }
-            state.total = state.total - 1;
+            state.laptops = newLaptops;
         },
-
     },
 })
 

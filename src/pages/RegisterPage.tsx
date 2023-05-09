@@ -111,15 +111,15 @@ const RegisterPage = () => {
     const [register] = userAPI.useRegisterUserMutation();
     const sendLoginRequest = async (e:any) => {  // todo replace any with object
         e.preventDefault()
-        console.log(values);
+        // console.log(values);
 
         await register(values as unknown as IRegister).unwrap()
             .then((token: IToken) => {
                 dispatch(tokenSlice.actions.tokenSet(token))
                 navigate("/")
             }).catch((response:any) => { // todo replace any with object
-                console.log(response)
-                console.log(response.data.errors)
+                // console.log(response)
+                // console.log(response.data.errors)
                 setErrors({
                     email: "",
                     username: "",
@@ -131,7 +131,7 @@ const RegisterPage = () => {
                     confirmPassword: ""
                 })
                 for(let error of response.data.errors){
-                    console.log(error);
+                    // console.log(error);
                     let kyz = Object.keys(error);
                     const key = kyz[0];
                     const value = error[key];

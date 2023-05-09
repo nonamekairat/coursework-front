@@ -1,13 +1,13 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useAppSelector} from "../hooks/redux";
-import {IFavoriteRequest, ILaptop} from "../models/ILaptop";
+import {IFavoriteRequest, IHardware, ILaptop} from "../models/ILaptop";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {laptopAPI} from "../services/LaptopService";
 import NotFoundPage from "./NotFoundPage";
 import LaptopItem from "../components/UI/laptop/LaptopItem";
 import {typesAPI} from "../services/TypesService";
 import {types} from "../util/Constants";
-import {getModel} from "../util/Functions";
+import {getModel, hardwareTypeList} from "../util/Functions";
 import imageNotFound from "../assets/image-not-found.png";
 import {brandAPI} from "../services/BrandService";
 import StandartButton from "../components/UI/button/StandartButton";
@@ -31,7 +31,6 @@ const LaptopPage = () => {
        id = parseInt(params.id);
     }
     const {data: laptop} = laptopAPI.useFetchLaptopByIdQuery(id);
-    const {data: brand} = brandAPI.useFetchBrandByIdQuery(id);
     const {data: favorites} = favoriteAPI.useFetchFavoritesQuery(null);
     const [addFavorite, {}] = favoriteAPI.useAddFavoriteMutation();
     const [deleteFavorite, {}] = favoriteAPI.useDeleteFavoriteMutation();
@@ -143,7 +142,7 @@ const LaptopPage = () => {
                                             Бренд
                                         </td>
                                         <td className="ps-3">
-                                            {brand && brand.name}
+                                            {laptop.brand}
                                         </td>
 
                                     </tr>
@@ -206,7 +205,7 @@ const LaptopPage = () => {
 
             </div>
 
-            <div className="pt-5">
+            <div className="mt-28">
                 <ReviewContainer laptopId={laptop.id}/>
             </div>
 
@@ -221,6 +220,17 @@ interface HardwareTableProps {
 }
 
 const HardwareTable:FC<HardwareTableProps> = ({laptop}) => {
+
+    const hardwareList:IHardware[] = [];
+
+    for (let i = 0; i < hardwareTypeList.length; i++) {
+        for (let j = 0; j < laptop.hardwareList.length; j++) {
+            if(hardwareTypeList[i] === laptop.hardwareList[j].hardwareType){
+                hardwareList.push(laptop.hardwareList[j]);
+            }
+        }
+    }
+
     return (
         <table className="table-auto border-b border-slate-900 text-xl w-full border-black">
             <thead className="border-b border-black">
@@ -229,7 +239,7 @@ const HardwareTable:FC<HardwareTableProps> = ({laptop}) => {
             </thead>
             <tbody className="border-b">
             {
-                laptop.hardwareList.map(hardware =>
+                hardwareList.map(hardware =>
                     <tr key={hardware.id}>
                         <td className="ps-3 py-2 font-semibold border-b border-black">
                             {hardware.hardwareType}

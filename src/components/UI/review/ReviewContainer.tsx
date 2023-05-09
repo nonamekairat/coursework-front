@@ -39,11 +39,8 @@ const ReviewContainer:FC<ReviewContainerProps> = ({laptopId}) => {
 
     return (
         <div>
-            <div className="text-4xl text-center mb-5">
-                Рецензии на этот ноутбук:
-            </div>
             <div className="flex">
-                <div className="w-4/12">
+                <div className="mt-3 w-4/12">
                     <AuthorizedComponent>
                         <div className="me-10">
                             {<PostReview
@@ -60,10 +57,16 @@ const ReviewContainer:FC<ReviewContainerProps> = ({laptopId}) => {
                     </AuthorizedComponent>
                 </div>
 
-                <div className="w-4/12">
+                <div className="ms-20 w-6/12">
+                    <div className="text-4xl mb-5">
+                        Рецензии на этот ноутбук:
+                    </div>
                     {(reviews && reviews.length !== 0) ?
                         reviews.map((review) =>
-                            <ReviewView key={review.id} review={review}/>
+                            <div className="mb-8">
+                                <ReviewView key={review.id} review={review}/>
+                            </div>
+
                         ) : <div className="text-xl">На этот ноутбук еще нету рецензий. Будьте первым кто оставит свой комментарий!</div>
                     }
                 </div>

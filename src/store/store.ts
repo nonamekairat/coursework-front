@@ -11,6 +11,16 @@ import {laptopAPI} from "../services/LaptopService";
 import {imageAPI} from "../services/ImageService";
 import {favoriteAPI} from "../services/FavoriteService";
 import {reviewAPI} from "../services/ReviewService";
+import {persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
 
 const rootReducer = combineReducers({
     userReducer,
@@ -27,10 +37,22 @@ const rootReducer = combineReducers({
     [reviewAPI.reducerPath]: reviewAPI.reducer,
 })
 
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['tokenReducer', 'cartReducer']
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 export const setupStore = () => {
     return configureStore({
-        reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+        reducer: persistedReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        })
             .concat(postAPI.middleware)
             .concat(userAPI.middleware)
             .concat(brandAPI.middleware)
@@ -42,7 +64,6 @@ export const setupStore = () => {
             .concat(typesAPI.middleware),
     })
 }
-
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>

@@ -1,8 +1,9 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {ILaptop} from "../../../models/ILaptop";
 import {Button} from "@material-tailwind/react";
-import {useAppDispatch} from "../../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {cartSlice} from "../../../store/reducers/CartSlice";
+import Counter from "../counter/Counter";
 
 interface OrderComponentProps {
     laptop: ILaptop;
@@ -12,9 +13,15 @@ interface OrderComponentProps {
 const OrderComponent:FC<OrderComponentProps> = ({laptop}) => {
 
     const dispatch = useAppDispatch();
+    const {laptops} = useAppSelector(state => state.cartReducer);
+    const [count, setCount] = useState(1);
+
 
     const toCartHandle = (e: any) => {
-        dispatch(cartSlice.actions.addToCart(laptop));
+        for (let i = 0; i < count; i++) {
+            dispatch(cartSlice.actions.addToCart(laptop));
+        }
+
     }
     const buyNowHandle = (e: any) => {
         //todo later
@@ -34,9 +41,13 @@ const OrderComponent:FC<OrderComponentProps> = ({laptop}) => {
                         :
                         <div></div>
                 }
+
                 <div className="flex flex-col space-y-2">
-                <Button color="yellow" className="rounded-3xl" onClick={toCartHandle}>добавить в корзину</Button>
-                <Button color="amber" className="rounded-3xl" onClick={buyNowHandle}>купить сейчас</Button>
+                    <div className="w-4/12">
+                        <Counter maxValue={laptop.amount} value={count} setValue={setCount}/>
+                    </div>
+                    <Button color="yellow" className="rounded-3xl" onClick={toCartHandle}>добавить в корзину</Button>
+                    <Button color="amber" className="rounded-3xl" onClick={buyNowHandle}>купить сейчас</Button>
                 </div>
             </div>
         </div>

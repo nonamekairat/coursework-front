@@ -33,6 +33,8 @@ import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {tokenSlice} from "../../../store/reducers/TokenSlice";
 import {userAPI} from "../../../services/UserService";
 import StandartButton from "../button/StandartButton";
+import IconNavList from "./IconNavList";
+import Search from "./Search";
 
 // profile menu component
 
@@ -154,6 +156,8 @@ function ProfileMenu() {
         </Menu>
     );
 }
+
+
 
 // nav list menu
 const navListMenuItems = [
@@ -292,27 +296,31 @@ const MyNavbar = () => {
     }, []);
 
     return (
-        <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
+        <Navbar className="mx-auto max-w-full z-50 relative">
             <div className="relative mx-auto flex items-center text-blue-gray-900">
-                <Typography
-                    as="li"
-                    href="#"
-                    className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
-                >
-                    <Link to="/">Material Tailwind</Link>
-                </Typography>
-                <div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block">
-                    <NavList />
+                <Link to="/" className="font-semibold text-2xl hover:text-blue-400">LaptopKG</Link>
+                {/*<div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block">*/}
+                {/*    <NavList />*/}
+                {/*</div>*/}
+                {/*<IconButton*/}
+                {/*    size="sm"*/}
+                {/*    color="blue-gray"*/}
+                {/*    variant="text"*/}
+                {/*    onClick={toggleIsNavOpen}*/}
+                {/*    className="ml-auto mr-2 lg:hidden"*/}
+                {/*>*/}
+                {/*    <Bars2Icon className="h-6 w-6" />*/}
+                {/*</IconButton>*/}
+                <div className="absolute h-10 left-1/4 w-6/12">
+
+                    <Search />
                 </div>
-                <IconButton
-                    size="sm"
-                    color="blue-gray"
-                    variant="text"
-                    onClick={toggleIsNavOpen}
-                    className="ml-auto mr-2 lg:hidden"
-                >
-                    <Bars2Icon className="h-6 w-6" />
-                </IconButton>
+
+
+                <div className="absolute top-2 right-24" >
+                    <IconNavList />
+                </div>
+
                 <ProfileMenu />
             </div>
             <MobileNav open={isNavOpen} className="overflow-scroll">

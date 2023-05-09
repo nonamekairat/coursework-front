@@ -58,7 +58,7 @@ const CreateLaptopPage = () => {
 
 
     const changeHardware = (e: IHardware) => {
-        console.log(e.id);
+        // console.log(e.id);
         // const newHardwareList = [];
         //todo: если человек решит менять что-то, нужно заменить это а не добавлять новое
         for (let i = 0; i < hardware.length; i++) {
@@ -71,22 +71,22 @@ const CreateLaptopPage = () => {
     }
 
     const changeCategory = (e: any) => {
-        console.log(e);
+        // console.log(e);
         setCategory(e);
     }
 
     const changeDescription = (e: any) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setDescription(e.target.value);
     }
 
     const changeGuarantee = (e: any) => {
-        console.log(e);
+        // console.log(e);
         setGuarantee(e);
     }
 
     const changeBrand = (e: any) => {
-        console.log(e);
+        // console.log(e);
         setBrand(e);
     }
 
@@ -127,10 +127,10 @@ const CreateLaptopPage = () => {
 
     const updateImage = (e: any) => {
         setSelectedImage(e.target.files[0])
-        if(selectedImage){
-            console.log(URL.createObjectURL(selectedImage))
-            console.log(selectedImage)
-        }
+        // if(selectedImage){
+        //     console.log(URL.createObjectURL(selectedImage))
+        //     console.log(selectedImage)
+        // }
 
     }
 

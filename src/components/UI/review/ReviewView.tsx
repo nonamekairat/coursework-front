@@ -42,8 +42,8 @@ const ReviewView:FC<ReviewViewProps> = ({review}) => {
                 <Rating
                     size={25}
                     readonly
-                    iconsCount={review.score}
-                    emptyColor="#f1a545"
+                    iconsCount={5}
+                    initialValue={review.score}
                 />
             </div>
             <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400">
