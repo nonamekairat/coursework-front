@@ -1,5 +1,10 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, {useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
+import Notification, {notificationIcon} from "./Notification";
+import useOutsideClick from "../../../hooks/useOutsideClick";
+import avatar from "../../../assets/avatar.png";
+import {ChevronDownIcon} from "@heroicons/react/24/outline";
+import {Menu, MenuHandler, MenuItem, MenuList} from "@material-tailwind/react";
 
 const itemsList = [
     {
@@ -14,22 +19,32 @@ const itemsList = [
         </svg>,
         link: "/favorites"
     },
-    {
-        icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 hover:stroke-blue-400">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
-        </svg>,
-        link: "/notifications"
-    },
+
 ]
 
 const IconNavList = () => {
+
+
+    const navigate = useNavigate();
+
+
+
     return (
-        <div className="flex space-x-5 ">
-            {itemsList.map(item =>
-                <Link key={item.link} to={item.link} >{item.icon}</Link>
-            )
-            }
+        <div>
+            <div className="flex space-x-5 justify-end">
+                {itemsList.map(item =>
+                    <div key={item.link} onClick={() => navigate(item.link)}>
+                        {item.icon}
+                    </div>
+
+                )}
+                <div>
+                    <Notification className="mt-3"/>
+                </div>
+            </div>
+
         </div>
+
     );
 };
 

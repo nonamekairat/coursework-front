@@ -11,7 +11,8 @@ import {favoriteAPI} from "../services/FavoriteService";
 import {reviewAPI} from "../services/ReviewService";
 import {FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE,} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import {orderAPI} from "../services/OrderService"; // defaults to localStorage for web
+import {orderAPI} from "../services/OrderService";
+import {notificationAPI} from "../services/NotificationService"; // defaults to localStorage for web
 
 
 const rootReducer = combineReducers({
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     [favoriteAPI.reducerPath]: favoriteAPI.reducer,
     [reviewAPI.reducerPath]: reviewAPI.reducer,
     [orderAPI.reducerPath]: orderAPI.reducer,
+    [notificationAPI.reducerPath]: notificationAPI.reducer,
 })
 
 const persistConfig = {
@@ -52,6 +54,7 @@ export const setupStore = () => {
             .concat(favoriteAPI.middleware)
             .concat(reviewAPI.middleware)
             .concat(orderAPI.middleware)
+            .concat(notificationAPI.middleware)
             .concat(typesAPI.middleware),
     })
 }

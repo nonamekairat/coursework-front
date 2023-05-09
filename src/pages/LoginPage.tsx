@@ -80,7 +80,7 @@ const Login = () => {
                 <CardBody className="flex flex-col gap-4">
 
                     <Alert
-                        show={isError}
+                        open={isError}
                         color="red"
                     >Wrong password or email.</Alert>
 

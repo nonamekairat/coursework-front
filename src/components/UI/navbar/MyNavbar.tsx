@@ -147,10 +147,13 @@ const MyNavbar = () => {
             <div className="relative mx-auto flex items-center text-blue-gray-900">
                 <Link to="/" className="font-semibold text-2xl hover:text-blue-400">LaptopKG</Link>
 
-                <div className="absolute h-10 left-1/4 w-6/12">
+                <div className="absolute h-10 right-1/4 w-6/12">
+                    <div className="flex justify-end">
+                        <Search />
+                    </div>
 
-                    <Search />
                 </div>
+
 
 
                 <div className="absolute top-2 right-24" >

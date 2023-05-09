@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_URL} from "../util/Constants";
 import {RootState} from "../store/store";
-import {IHardware, IHardwareRequest} from "../models/ILaptop";
 import {IOrder, IOrderRequest} from "../models/IOrder";
 
 
