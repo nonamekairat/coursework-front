@@ -15,6 +15,7 @@ import {Textarea} from "@material-tailwind/react";
 import StandartButton from "../components/UI/button/StandartButton";
 import {laptopAPI} from "../services/LaptopService";
 import {imageAPI} from "../services/ImageService";
+import {useNavigate} from "react-router-dom";
 
 
 type ICreateLaptopValue = {
@@ -22,6 +23,8 @@ type ICreateLaptopValue = {
 }
 
 const CreateLaptopPage = () => {
+
+    const navigate = useNavigate();
 
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -94,28 +97,28 @@ const CreateLaptopPage = () => {
             id: "name",
             name: "name",
             type: "text",
-            label: "name",
+            label: "Наименование",
             required: true,
         },
         {
             id: "price",
             name: "price",
             type: "text",
-            label: "price",
+            label: "Цена",
             required: true,
         },
         {
             id: "amount",
             name: "amount",
             type: "text",
-            label: "amount",
+            label: "Количество на складе",
             required: true,
         },
         {
             id: "discount",
             name: "discount",
             type: "text",
-            label: "discount",
+            label: "Скидка",
             required: false,
         }
     ]
@@ -154,17 +157,19 @@ const CreateLaptopPage = () => {
                     data.append('file', selectedImage);
                     uploadImage({id: createdLaptop.id, data: data});
                 }
+
             }); // todo: catch with errors, later
+        navigate("/");
     }
 
     return (
         <div className="container mx-auto mt-20 flex">
 
-            <div className="w-3/12 bg-amber-500 py-3 pt-36 px-6">
+            <div className="w-3/12py-3 pt-36 px-6">
                 <UploadAndDisplayImage selectedImage={selectedImage} onChange={updateImage}/>
             </div>
 
-            <div className="p-3 w-full bg-amber-200">
+            <div className="p-3 w-full">
             <>
                 <div className="flex">
                     <div className="w-full mr-3">
@@ -185,7 +190,7 @@ const CreateLaptopPage = () => {
                         {categories &&
 
                             <MySelect
-                                label="Category"
+                                label="Категория"
                                 options={categories.map((c)=> {
                                     return {value: c, child: c} as IOption;
                                 })}
@@ -196,7 +201,7 @@ const CreateLaptopPage = () => {
                         }
                         {guarantees &&
                             <MySelect
-                                label="Guarantee"
+                                label="Гарантия"
                                 options={guarantees.map((g)=> {
                                     return {value: g, child: g} as IOption;
                                 })}
@@ -226,7 +231,7 @@ const CreateLaptopPage = () => {
                 }
 
                 <div className="w-96 mt-3">
-                    <Textarea size="lg" value={description} onChange={changeDescription} label="Description" />
+                    <Textarea size="lg" value={description} onChange={changeDescription} label="Описание" />
                 </div>
 
 

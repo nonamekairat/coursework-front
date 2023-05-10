@@ -22,8 +22,8 @@ const UploadAndDisplayImage:FC<UploadAndDisplayImageProps> = ({selectedImage, on
           />
           </div>
       )}
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload
-            file</label>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">
+            Изображение ноутбука</label>
         <input
         type="file"
         name="file"

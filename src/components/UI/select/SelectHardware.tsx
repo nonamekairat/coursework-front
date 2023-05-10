@@ -47,7 +47,7 @@ const SelectHardware:FC<SelectHardwareProps> = ({hardwareType, hardwareList, cha
 
     if(hardwareList){
         const hardwareListByHardwareType = hardwareList.filter((h) => h.hardwareType == hardwareType);
-        return <div className="flex">
+        return <div className="flex items-center">
             <div className="w-4/12">
                 <MySelect
                     label={hardwareType}

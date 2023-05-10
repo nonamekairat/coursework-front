@@ -12,7 +12,7 @@ interface MySelectProps {
 const MySelect:FC<MySelectProps> = ({label, options, onChange, className}) => {
     return (
         <div className={"mt-3 " + className}>
-            <Select label={label} onChange={onChange}>
+            <Select label={label} onChange={onChange} size="md">
                 {
                     options.map((val) => (
                         <Option key={val.child} value={val.value}>{val.child}</Option>

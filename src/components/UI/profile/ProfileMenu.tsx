@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {MenuItem} from "@material-tailwind/react";
 import OrderTable from "../order/OrderTable";
 import FavoriteLaptopsContainer from "../laptop/FavoriteLaptopsContainer";
@@ -27,11 +27,12 @@ const menu = [
 
 
 interface ProfileMenuProps {
+    item: number;
 }
 
-const ProfileMenu:FC<ProfileMenuProps> = ({}) => {
+const ProfileMenu:FC<ProfileMenuProps> = ({item}) => {
 
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(item);
     useEffect(() => {
 
     }, [active])

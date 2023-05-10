@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
-import {INotification} from "../../../models/INotification";
 import NotificationItem from "./NotificationItem";
 import {notificationAPI} from "../../../services/NotificationService";
-import {MenuItem, Typography} from "@material-tailwind/react";
+import {MenuItem} from "@material-tailwind/react";
 import MessagePage from "../../../pages/MessagePage";
 
 interface NotificationContainerProps {

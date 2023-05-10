@@ -4,7 +4,6 @@ import avatar from '../../../assets/avatar.png';
 import {Avatar, Button, Menu, MenuHandler, MenuItem, MenuList, Navbar, Typography,} from "@material-tailwind/react";
 import {
     ChevronDownIcon,
-    Cog6ToothIcon,
     InboxArrowDownIcon,
     LifebuoyIcon,
     PowerIcon,
@@ -18,9 +17,7 @@ import {userAPI} from "../../../services/UserService";
 import StandartButton from "../button/StandartButton";
 import IconNavList from "./IconNavList";
 import Search from "./Search";
-
-// profile menu component
-
+import Administration from "./Administration";
 
 function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -30,30 +27,24 @@ function ProfileMenu() {
     const {data: user, error, isLoading, refetch} = userAPI.useFetchUserQuery(null);
 
 
-    // todo: create pages for links
     const profileMenuItems = [
         {
-            label: "My Profile",
+            label: "профиль",
             icon: UserCircleIcon,
-            onClick: () => navigate("/profile"),
+            onClick: () => navigate("/profile", {state: {item: 3}}),
         },
         {
-            label: "Edit Profile",
-            icon: Cog6ToothIcon,
-            onClick: () => navigate("/about"),
-        },
-        {
-            label: "My Orders",
+            label: "Заказы",
             icon: InboxArrowDownIcon,
-            onClick: () => navigate("/my_orders"),
+            onClick: () => navigate("/profile", {state: {item: 0}}),
         },
         {
-            label: "Help",
+            label: "Помощь",
             icon: LifebuoyIcon,
             onClick: () => navigate("/about"),
         },
         {
-            label: "Sign Out",
+            label: "выйти из аккаунта",
             icon: PowerIcon,
             onClick: () => {
                 logout()
@@ -143,26 +134,27 @@ const MyNavbar = () => {
 
 
     return (
-        <Navbar className="mx-auto max-w-full z-50 relative">
-            <div className="relative mx-auto flex items-center text-blue-gray-900">
-                <Link to="/" className="font-semibold text-2xl hover:text-blue-400">LaptopKG</Link>
+        <div>
+            <Navbar className="mx-auto max-w-full z-30 fixed top-0">
+                <div className="relative mx-auto flex items-center text-blue-gray-900">
+                    <Link to="/" className="font-semibold text-2xl hover:text-blue-400">LaptopKG</Link>
 
-                <div className="absolute h-10 right-1/4 w-6/12">
-                    <div className="flex justify-end">
-                        <Search />
+                    <div className="absolute h-10 right-1/4 w-6/12">
+                        <div className="flex justify-end">
+                            <Search />
+                        </div>
+
+                    </div>
+                    <div className="absolute top-2 right-24" >
+                        <IconNavList />
                     </div>
 
+                    <ProfileMenu />
                 </div>
+            </Navbar>
+            <Administration />
+        </div>
 
-
-
-                <div className="absolute top-2 right-24" >
-                    <IconNavList />
-                </div>
-
-                <ProfileMenu />
-            </div>
-        </Navbar>
     );
 }
 

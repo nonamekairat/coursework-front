@@ -59,7 +59,7 @@ const LaptopItem:FC<LaptopItemProps> = ({laptop, viewType, className, onClick}) 
     return (
         <div className={className}>
             <Card className="w-33">
-                <CardHeader color="blue" className="relative h-56 w-56 mx-auto">
+                <CardHeader color="blue" className="relative h-56 w-56 mx-auto flex justify-center">
                     <img
                         src={laptop.imageUrl ? laptop.imageUrl : imageNotFound}
                         alt="img-blur-shadow"

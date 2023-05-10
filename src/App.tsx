@@ -12,6 +12,7 @@ import LaptopPage from "./pages/LaptopPage";
 import CartPage from "./pages/CartPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import MessagePage from "./pages/MessagePage";
+import Administration from "./components/UI/navbar/Administration";
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
       <BrowserRouter>
 
           <MyNavbar/>
+          <div className="mt-40"></div>
           <Routes>
               <Route path={'/register'} element={<RegisterPage/>}/>
               <Route path={'/'} element={<MainPage/>}/>

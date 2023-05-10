@@ -43,10 +43,10 @@ const SelectBrand:FC<SelectBrandProps> = ({brands, changeBrand}) => { // todo re
 
 
     if(brands){
-        return <div className="flex">
+        return <div className="flex items-center">
             <div className="w-4/12">
                 <MySelect
-                    label="Brand"
+                    label="Бренд"
                     options={brands.map((brand)=> {
                         return {value: brand, child: brand.name} as IOption;
                     })}
