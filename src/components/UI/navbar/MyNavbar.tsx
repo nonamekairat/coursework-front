@@ -18,6 +18,7 @@ import StandartButton from "../button/StandartButton";
 import IconNavList from "./IconNavList";
 import Search from "./Search";
 import Administration from "./Administration";
+import AdminComponent from "../../AdminComponent";
 
 function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -152,7 +153,10 @@ const MyNavbar = () => {
                     <ProfileMenu />
                 </div>
             </Navbar>
-            <Administration />
+            <AdminComponent>
+                <Administration />
+            </AdminComponent>
+
         </div>
 
     );

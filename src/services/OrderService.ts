@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_URL} from "../util/Constants";
 import {RootState} from "../store/store";
-import {IOrder, IOrderRequest} from "../models/IOrder";
+import {IOrder, IOrderChangeStatusRequest, IOrderRequest} from "../models/IOrder";
 
 
 export const orderAPI = createApi({
@@ -31,6 +31,13 @@ export const orderAPI = createApi({
             }),
             providesTags: result => ['Order']
         }),
+        fetchAllMyOrders: build.query<IOrder[], null>({
+            query: () => ({
+                url: `/orders/myOrders`,
+                method: 'GET'
+            }),
+            providesTags: result => ['Order']
+        }),
         makeOrder: build.mutation<IOrder, IOrderRequest>({
             query: (order) => ({
                 url: `/orders`,
@@ -50,6 +57,14 @@ export const orderAPI = createApi({
             query: (id) => ({
                 url: `/orders/cancelOrder/${id}`,
                 method: 'PUT',
+            }),
+            invalidatesTags: ['Order']
+        }),
+        changeStatus: build.mutation<string, IOrderChangeStatusRequest>({
+            query: (request) => ({
+                url: `/orders/changeStatus/${request.id}`,
+                method: 'PUT',
+                params: request.params
             }),
             invalidatesTags: ['Order']
         }),

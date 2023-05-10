@@ -17,3 +17,13 @@ export interface IOrderRequest {
     deliveryType: string;
     paymentType: string;
 }
+
+export interface IOrderChangeStatusRequest {
+    params: IOrderStatusMessage;
+    id: number;
+}
+
+export interface IOrderStatusMessage {
+    message: string;
+    orderStatus: string;
+}

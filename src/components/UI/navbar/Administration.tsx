@@ -67,7 +67,7 @@ const Administration = () => {
                         Создание ноутбука
                     </ListItem>
 
-                    <ListItem>
+                    <ListItem onClick={() => clickHandle("/admin/orders")}>
                         <ListItemPrefix>
                             <ClipboardDocumentListIcon className="h-5 w-5" />
                         </ListItemPrefix>

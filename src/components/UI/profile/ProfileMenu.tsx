@@ -42,7 +42,7 @@ const ProfileMenu:FC<ProfileMenuProps> = ({item}) => {
         <div>
             <div className="flex">
                 {menu.map((value, index) =>
-                    <MenuItem>
+                    <MenuItem key={index}>
                         <div className={  index === active ?
                             "text-lg px-3 py-2 border-b-2 " + activeClass : "text-lg py-2 px-3 border-b-2"}
                              onClick={() => setActive(index)}

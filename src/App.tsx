@@ -12,7 +12,8 @@ import LaptopPage from "./pages/LaptopPage";
 import CartPage from "./pages/CartPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import MessagePage from "./pages/MessagePage";
-import Administration from "./components/UI/navbar/Administration";
+import AdminOrderPage from "./pages/AdminOrderPage";
+import AdminRoute from "./util/AdminRoute";
 
 const App = () => {
 
@@ -25,6 +26,9 @@ const App = () => {
           <div className="mt-40"></div>
           <Routes>
               <Route path={'/register'} element={<RegisterPage/>}/>
+              <Route path={'/admin/orders'} element={
+                      <AdminOrderPage/>
+              }/>
               <Route path={'/'} element={<MainPage/>}/>
               <Route path={'/cart'} element={<CartPage/>}/>
               <Route path={'/favorites'} element={<FavoritesPage/>}/>

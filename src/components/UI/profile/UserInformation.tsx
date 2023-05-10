@@ -1,7 +1,5 @@
 import React, {FC} from 'react';
 import {IUser} from "../../../models/user/IUser";
-import {useNavigate} from "react-router-dom";
-import StandartButton from "../button/StandartButton";
 import avatar from "../../../assets/avatar.png";
 import {Typography} from "@material-tailwind/react";
 
@@ -10,13 +8,6 @@ interface UserInformationProps {
 }
 
 const UserInformation:FC<UserInformationProps> = ({user}) => {
-
-    const navigate = useNavigate();
-
-    const changeLink = () => {
-        navigate("change")
-    }
-
 
     return (
         <div className="">
@@ -27,14 +18,9 @@ const UserInformation:FC<UserInformationProps> = ({user}) => {
                  shadow rounded-full max-w-full h-auto align-middle border-none"/>
             <div className="text-center font-semibold">
                 <Typography variant="lead">
-                    {user?.email}
+                    {user ? user.email : "адресс электронной почты"}
                 </Typography>
             </div>
-            <div className="mx-auto flex flex-col items-center my-3">
-
-            </div>
-
-
         </div>
 
     );

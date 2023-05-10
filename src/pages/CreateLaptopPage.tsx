@@ -69,7 +69,6 @@ const CreateLaptopPage = () => {
             }
         }
         setHardware([...hardware, e]);
-
     }
 
     const changeCategory = (e: any) => {
@@ -197,7 +196,6 @@ const CreateLaptopPage = () => {
                                 onChange={changeCategory}
                                 // className="w-6/12"
                             />
-
                         }
                         {guarantees &&
                             <MySelect

@@ -60,10 +60,9 @@ const Notification:FC<NotificationProps> = ({className}) => {
                 </MenuItem>
                 {notifications && notifications.length !== 0 ?
                     notifications.map(notification =>
-                        <MenuItem>
+                        <MenuItem key={notification.id}>
                             <NotificationItem
                                 className="w-full"
-                                key={notification.id}
                                 notification={notification}
                             />
                         </MenuItem>

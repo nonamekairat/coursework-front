@@ -75,7 +75,7 @@ const LaptopItem:FC<LaptopItemProps> = ({laptop, viewType, className, onClick}) 
                     </Typography>
                 </CardBody>
                 <CardFooter divider className="flex items-center justify-between py-3">
-                    <Typography variant="small">{laptop.price}</Typography>
+                    <Typography variant="small">цена - {laptop.price} сом</Typography>
                     <Typography variant="small" color="gray" className="flex gap-1">
                         <StandartButton onClick={toLaptop}>узнать больше</StandartButton>
                     </Typography>

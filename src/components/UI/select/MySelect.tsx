@@ -5,14 +5,18 @@ import {IOption} from "../../../models/form/IOption";
 interface MySelectProps {
     label: string;
     options: IOption[];
+    // initialValue?: string
     onChange: (e: any) => void;
     className?: string | undefined;
+    variant?: variant | undefined;
 }
+type variant = "standard" | "outlined" | "static";
 
-const MySelect:FC<MySelectProps> = ({label, options, onChange, className}) => {
+
+const MySelect:FC<MySelectProps> = ({label, options, onChange, className,variant}) => {
     return (
         <div className={"mt-3 " + className}>
-            <Select label={label} onChange={onChange} size="md">
+            <Select variant={variant} label={label} onChange={onChange}>
                 {
                     options.map((val) => (
                         <Option key={val.child} value={val.value}>{val.child}</Option>

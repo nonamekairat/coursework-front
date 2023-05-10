@@ -49,9 +49,9 @@ const Search = () => {
                 <Input size="lg" autoFocus={true} value={query} onChange={onChange} label="Поиск"/>
                 {laptops && query ?
                     laptops.map(laptop =>
-                        <MenuItem>
+                        <MenuItem key={laptop.id}>
                         <LaptopItem
-                            key={laptop.id}
+
                             viewType="small_card"
                             laptop={laptop}
                             onClick={() => setOpen(false)}

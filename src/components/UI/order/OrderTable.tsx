@@ -10,7 +10,7 @@ const TABLE_HEAD = ["Статус", "Общая сумма", "Дата зака�
 
 export default function OrderTable() {
 
-    const {data: TABLE_ROWS, } = orderAPI.useFetchAllOrdersQuery(null);
+    const {data: TABLE_ROWS, } = orderAPI.useFetchAllMyOrdersQuery(null);
 
 
     if(TABLE_ROWS && TABLE_ROWS.length === 0)
@@ -63,8 +63,6 @@ export default function OrderTable() {
                     </tbody>
                 </table>
             </CardBody>
-
         </Card>
-
     );
 }
