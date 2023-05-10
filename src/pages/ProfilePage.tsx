@@ -1,6 +1,7 @@
 import React from 'react';
 import {userAPI} from "../services/UserService";
 import UserInformation from "../components/UI/profile/UserInformation";
+import ProfileMenu from "../components/UI/profile/ProfileMenu";
 
 
 const ProfilePage = () => {
@@ -9,13 +10,13 @@ const ProfilePage = () => {
 
     return (
         <div className="container mx-auto mt-20 flex">
-            <div className="w-full bg-amber-500">
-                todo: notifications - orders - favorite_laptops
+            <div className="w-full">
+                {/*todo: notifications - orders - favorite_laptops*/}
+                <ProfileMenu />
+
             </div>
-            <div className="w-4/12 bg-amber-200">
-
+            <div className="w-4/12">
                 <UserInformation user={user} />
-
             </div>
 
 
@@ -23,5 +24,8 @@ const ProfilePage = () => {
         </div>
     );
 };
+
+
+
 
 export default ProfilePage;

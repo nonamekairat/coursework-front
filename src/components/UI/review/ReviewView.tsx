@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {IReview} from "../../../models/ILaptop";
 import {Rating} from "react-simple-star-rating";
 import avatar from "../../../assets/avatar.png";
+import {convertDate} from "../../../util/Functions";
 
 
 interface ReviewViewProps {
@@ -12,15 +13,6 @@ const ReviewView:FC<ReviewViewProps> = ({review}) => {
 
     const user = review.userDto;
 
-    const reviewDate = () => {
-        const dt = new Date(review.updatedAt)
-        const date = new Date();
-        date.setMonth(dt.getMonth() - 1);
-        const month = date.toLocaleString('ru', { month: 'long' });
-        const day = dt.getDate();
-        const year = dt.getFullYear();
-        return `${month}  ${day}, ${year}`;
-    }
     const getName = () => {
         if(user.firstName && user.lastName){
             return `${user.firstName} ${user.lastName}`
@@ -47,7 +39,7 @@ const ReviewView:FC<ReviewViewProps> = ({review}) => {
                 />
             </div>
             <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400">
-                <p><time dateTime="2017-03-03 19:00">{reviewDate()}</time></p>
+                <p><time dateTime="2017-03-03 19:00">{convertDate(review.updatedAt)}</time></p>
             </footer>
             <p className="mb-2 text-gray-800 dark:text-gray-700">{review.text}</p>
 

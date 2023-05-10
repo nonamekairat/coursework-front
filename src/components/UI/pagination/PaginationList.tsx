@@ -8,7 +8,6 @@ interface PaginationListProps {
     total: number;
 }
 
-
 const PaginationList:FC<PaginationListProps> = ({active, setActive, total}) => {
 
     const getItemProps = (index: any) =>
@@ -47,7 +46,7 @@ const PaginationList:FC<PaginationListProps> = ({active, setActive, total}) => {
                 onClick={prev}
                 disabled={active === 1}
             >
-                <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
+                <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> прошлая страница
             </Button>
             <div className="flex items-center gap-2">
                 {getTotalList().map(value => <IconButton key={value} {...getItemProps(value)}>{value}</IconButton>)}
@@ -64,7 +63,7 @@ const PaginationList:FC<PaginationListProps> = ({active, setActive, total}) => {
                 onClick={next}
                 disabled={active === total}
             >
-                Next
+                следующая страница
                 <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
             </Button>
         </div>

@@ -27,7 +27,7 @@ const LaptopInCart:FC<LaptopInCartProps> = ({cartLaptop}) => {
     }
 
     return (
-        <div className="mb-3">
+        <div className="mb-3 bg-white">
             <div className="border rounded-xl border-gray-300">
                 <div className="flex p-3 text-xl">
                     <div className="flex">
@@ -55,7 +55,7 @@ const LaptopInCart:FC<LaptopInCartProps> = ({cartLaptop}) => {
                     </div>
 
                     <div className="w-2/12">
-                        <Button size="sm" color='red' onClick={deleteLaptop}>{xMark}</Button>
+                        <Button size="sm" color='white' className="hover:bg-red-300" onClick={deleteLaptop}>{xMark}</Button>
                     </div>
 
 

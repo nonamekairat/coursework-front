@@ -12,6 +12,16 @@ export const hardwareTypeList = [
     'видеокарта',
     'разрешение'
 ]
+export const convertDate = (convertDate: Date) => {
+    const dt = new Date(convertDate)
+    const date = new Date();
+    date.setMonth(dt.getMonth() - 1);
+    const month = date.toLocaleString('ru', { month: 'long' });
+    const day = dt.getDate();
+    const year = dt.getFullYear();
+    return `${month}  ${day}, ${year}`;
+}
+
 
 const getModel = (laptop: ILaptop) => {
     let model:string = "";
