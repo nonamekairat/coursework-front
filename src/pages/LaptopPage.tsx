@@ -12,12 +12,11 @@ import ReviewContainer from "../components/UI/review/ReviewContainer";
 import AuthorizedComponent from "../components/AuthorizedComponent";
 import OrderComponent from "../components/UI/order/OrderComponent";
 import {Rating} from "react-simple-star-rating";
+import LaptopChangeComponent from "../components/UI/laptop/LaptopChangeComponent";
 
 
 const LaptopPage = () => {
     const params = useParams();
-    const navigate = useNavigate();
-    const {accessToken} = useAppSelector(state => state.tokenReducer);
     const [isFavorite, setIsFavorite] = useState(false);
     let id = 0;
     if(params.id){
@@ -190,10 +189,11 @@ const LaptopPage = () => {
                     {/*todo: make rating looking*/}
 
                 </div>
-                <div className="w-3/12 p-3">
+                <div className="w-3/12 p-3 flex flex-col space-y-20">
 
                     <OrderComponent laptop={laptop}/>
 
+                    <LaptopChangeComponent laptop={laptop} />
                 </div>
 
             </div>

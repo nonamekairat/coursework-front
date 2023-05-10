@@ -1,13 +1,13 @@
 import React, {FC, useState} from 'react';
 import {orderAPI} from "../../../services/OrderService";
-import {Checkbox, IconButton, Tooltip, Typography} from "@material-tailwind/react";
+import {IconButton, Tooltip, Typography} from "@material-tailwind/react";
 import {convertDate} from "../../../util/Functions";
-import {BookmarkSlashIcon, CheckIcon, PencilIcon, TrashIcon, XMarkIcon} from "@heroicons/react/24/solid";
+import {ArrowTopRightOnSquareIcon, CheckIcon, PencilIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {IOrder} from "../../../models/IOrder";
 import OrderStatus from "./OrderStatus";
-import {Check} from "heroicons-react";
 import {typesAPI} from "../../../services/TypesService";
 import {types} from "../../../util/Constants";
+import LaptopModal from "../modal/LaptopModal";
 
 interface OrderViewAdminProps {
     order: IOrder;
@@ -29,6 +29,9 @@ const OrderAdminView:FC<OrderViewAdminProps> = ({isLast, order
     const {data: orderStatuses} = typesAPI.useFetchTypesQuery(types.orderStatus);
     const [orderStatus, setOrderStatus] = useState<string>(order.orderStatus);
     const [orderMessage, setOrderMessage] = useState("");
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => setOpen((cur) => !cur);
 
     const changeButton = () => {
         setIsChanging(!isChanging);
@@ -92,12 +95,19 @@ const OrderAdminView:FC<OrderViewAdminProps> = ({isLast, order
                             </IconButton>
                         </Tooltip>
                     </div> :
-                    <div className="flex justify-end">
+                    <div className="flex space-x-2 justify-end">
+
                         <Tooltip content="Редактировать">
                             <IconButton onClick={changeButton} variant="text" color="blue-gray">
                                 <PencilIcon className="h-4 w-4" />
                             </IconButton>
                         </Tooltip>
+                        <Tooltip content="Ноутбуки">
+                            <IconButton onClick={handleOpen} variant="text" color="blue-gray">
+                                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                            </IconButton>
+                        </Tooltip>
+                        <LaptopModal laptops={order.laptops} open={open} handleOpen={handleOpen}/>
                     </div>
 
                 }

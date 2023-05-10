@@ -29,5 +29,12 @@ export const imageAPI = createApi({
                 body: laptopImage.data,
             }),
         }),
+        saveMyAvatar: build.mutation<string, any>({
+            query: (laptopImage: any) => ({
+                url: `/image/upload/myAvatar`,
+                method: 'POST',
+                body: laptopImage.data,
+            }),
+        }),
     })
 })

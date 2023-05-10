@@ -108,6 +108,7 @@ const RegisterPage = () => {
     }
 
     const dispatch = useAppDispatch();
+    // console.log(values);
     const [register] = userAPI.useRegisterUserMutation();
     const sendLoginRequest = async (e:any) => {  // todo replace any with object
         e.preventDefault()
@@ -116,8 +117,10 @@ const RegisterPage = () => {
         await register(values as unknown as IRegister).unwrap()
             .then((token: IToken) => {
                 dispatch(tokenSlice.actions.tokenSet(token))
-                navigate("/")
+                navigate("/password/activate")
             }).catch((response:any) => { // todo replace any with object
+
+                if(response.status !== 400) navigate("/password/activate")
                 // console.log(response)
                 // console.log(response.data.errors)
                 setErrors({

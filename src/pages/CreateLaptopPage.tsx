@@ -164,7 +164,7 @@ const CreateLaptopPage = () => {
     return (
         <div className="container mx-auto mt-20 flex">
 
-            <div className="w-3/12py-3 pt-36 px-6">
+            <div className="w-3/12 py-3 pt-36 px-6">
                 <UploadAndDisplayImage selectedImage={selectedImage} onChange={updateImage}/>
             </div>
 

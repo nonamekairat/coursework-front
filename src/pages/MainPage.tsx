@@ -13,6 +13,7 @@ import {brandAPI} from "../services/BrandService";
 import MySelect from "../components/UI/select/MySelect";
 import {IOption} from "../models/form/IOption";
 import SelectBrand from "../components/UI/select/SelectBrand";
+import LaptopContainer from "../components/UI/laptop/LaptopContainer";
 
 const sortList = [
     {
@@ -183,7 +184,7 @@ const MainPage = () => {
                 <div className="w-3/12">
                     <div className="flex flex-col space-y-2">
 
-                        <div className="text-3xl font-semibold">
+                        <div className="text-3xl pb-1 font-semibold">
                             Сортировать
                         </div>
 
@@ -240,7 +241,7 @@ const MainPage = () => {
                             />
                         }
                         <div className="p-1 text-xl font-semibold">
-                            По железу
+                            По Характеристикам
                         </div>
                         {hardwareTypes &&
                             hardwareTypes.map(hardwareType =>
@@ -261,11 +262,9 @@ const MainPage = () => {
 
                 </div>
                 <div className="w-full p-3">
-                    <div className="grid grid-cols-3 gap-2 gap-y-5">
-                        {pageLaptop &&
-                            pageLaptop.content.map(laptop => <LaptopItem key={laptop.id} laptop={laptop}/>)
-                        }
-                    </div>
+                    {pageLaptop &&
+                        <LaptopContainer laptops={pageLaptop.content} />
+                    }
                     <div className="mt-6">
                         <PaginationList total={totalPage} active={page} setActive={setPage} />
                     </div>

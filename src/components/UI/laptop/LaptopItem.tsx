@@ -13,7 +13,7 @@ interface LaptopItemProps {
     onClick?: () => void;
 }
 
-type LaptopItemType = "small_card" | "card" | "row";
+export type LaptopItemType = "small_card" | "card" | "row";
 
 
 

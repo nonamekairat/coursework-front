@@ -14,6 +14,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import MessagePage from "./pages/MessagePage";
 import AdminOrderPage from "./pages/AdminOrderPage";
 import AdminRoute from "./util/AdminRoute";
+import ActivatePasswordPage from "./pages/ActivatePasswordPage";
 
 const App = () => {
 
@@ -26,11 +27,10 @@ const App = () => {
           <div className="mt-40"></div>
           <Routes>
               <Route path={'/register'} element={<RegisterPage/>}/>
-              <Route path={'/admin/orders'} element={
-                      <AdminOrderPage/>
-              }/>
+              <Route path={'/admin/orders'} element={<AdminOrderPage/>}/>
               <Route path={'/'} element={<MainPage/>}/>
               <Route path={'/cart'} element={<CartPage/>}/>
+              <Route path={'/password/activate'} element={<ActivatePasswordPage/>}/>
               <Route path={'/favorites'} element={<FavoritesPage/>}/>
               <Route path={'/laptops/:id'} key="'/laptops/:id" element={<LaptopPage />}/>
               <Route path={'/profile'} element={<ProfilePage/>}/>

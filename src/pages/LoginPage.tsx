@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {Alert, Card, CardBody, CardFooter, CardHeader, Checkbox, Typography,} from "@material-tailwind/react";
 import FormInput from "../components/UI/input/FormInput";
 import MyButton from "../components/UI/button/MyButton";
-import {useAppDispatch} from "../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {userAPI} from "../services/UserService";
 import {IAuthenticate} from "../models/user/IAuthenticate";
 import {tokenSlice} from "../store/reducers/TokenSlice";
@@ -21,7 +21,8 @@ const Login = () => {
         email: "",
         password: ""
     } as IAuthenticateValue);
-    const [isError, setisError] = useState(false);
+    // const {accessToken} = useAppSelector(state => state.tokenReducer);
+    const [isError, setIsError] = useState(false);
 
     const inputs = [
         {
@@ -49,15 +50,15 @@ const Login = () => {
 
     const sendLoginRequest = async (e: any) => {
         e.preventDefault()
-
+        dispatch(tokenSlice.actions.tokenRemove)
         await authenticate(values as unknown as IAuthenticate).unwrap()
             .then((token: IToken) => {
                 dispatch(tokenSlice.actions.tokenSet(token))
                 navigate("/")
             }
             ).catch((response:any) => {
-                setisError(false);
-                if(response.status == 403) setisError(true);
+                setIsError(false);
+                if(response.status == 403) setIsError(true);
                 // alert(response.message);
         })
 

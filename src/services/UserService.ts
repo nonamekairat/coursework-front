@@ -5,6 +5,7 @@ import {IRegister} from "../models/user/IRegister";
 import {IAuthenticate} from "../models/user/IAuthenticate";
 import {IUser} from "../models/user/IUser";
 import {RootState} from "../store/store";
+import {IOrder} from "../models/IOrder";
 
 
 export const userAPI = createApi({
@@ -43,6 +44,12 @@ export const userAPI = createApi({
                 body: user
             }),
             invalidatesTags: ['User']
+        }),
+        activatePassword: build.mutation<string, string>({
+            query: (token) => ({
+                url: `auth/activate/${token}`,
+                method: 'GET',
+            }),
         }),
 
         fetchUser: build.query<IUser, null>({

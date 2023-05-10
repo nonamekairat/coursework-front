@@ -30,7 +30,7 @@ function ProfileMenu() {
 
     const profileMenuItems = [
         {
-            label: "профиль",
+            label: "Профиль",
             icon: UserCircleIcon,
             onClick: () => navigate("/profile", {state: {item: 3}}),
         },

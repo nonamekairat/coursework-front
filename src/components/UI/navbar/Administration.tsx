@@ -38,7 +38,7 @@ const Administration = () => {
 
     return (
         <React.Fragment>
-            <div className="flex justify-end pe-10 z-50 fixed right-0" style={{top: 73}}>
+            <div className="flex justify-end pe-10 z-50 fixed right-0 " style={{top: 73}}>
                 <Button onClick={openDrawer} className="rounded-t-none border-none drop-shadow" variant="filled" color="white">
 
                     <div className="flex items-center gap-2">
