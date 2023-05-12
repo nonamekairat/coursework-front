@@ -33,9 +33,9 @@ export const userAPI = createApi({
             query: (user) => ({
                 url: `/auth/register`,
                 method: 'POST',
-
                 body: user
             }),
+            invalidatesTags: ['User']
         }),
         authenticateUser: build.mutation<IToken, IAuthenticate>({
             query: (user) => ({
@@ -50,6 +50,7 @@ export const userAPI = createApi({
                 url: `auth/activate/${token}`,
                 method: 'GET',
             }),
+            invalidatesTags: ['User']
         }),
 
         fetchUser: build.query<IUser, null>({

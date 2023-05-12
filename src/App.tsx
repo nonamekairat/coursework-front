@@ -13,8 +13,9 @@ import CartPage from "./pages/CartPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import MessagePage from "./pages/MessagePage";
 import AdminOrderPage from "./pages/AdminOrderPage";
-import AdminRoute from "./util/AdminRoute";
 import ActivatePasswordPage from "./pages/ActivatePasswordPage";
+import UpdateLaptopPage from "./pages/update-laptop/UpdateLaptopPage";
+import PresentLaptop from "./pages/update-laptop/PresentLaptop";
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const App = () => {
               <Route path={'/password/activate'} element={<ActivatePasswordPage/>}/>
               <Route path={'/favorites'} element={<FavoritesPage/>}/>
               <Route path={'/laptops/:id'} key="'/laptops/:id" element={<LaptopPage />}/>
+              <Route path={'/laptops/:id/update'} key="'/laptops/:id/update" element={<PresentLaptop />}/>
               <Route path={'/profile'} element={<ProfilePage/>}/>
               <Route path={'/profile/change'} element={<ProfileChangePage/>}/>
               <Route path={'/laptop/create'} element={<CreateLaptopPage/>}/>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classes from "./MyNavbar.module.css";
 import avatar from '../../../assets/avatar.png';
 import {Avatar, Button, Menu, MenuHandler, MenuItem, MenuList, Navbar, Typography,} from "@material-tailwind/react";
@@ -19,14 +19,16 @@ import IconNavList from "./IconNavList";
 import Search from "./Search";
 import Administration from "./Administration";
 import AdminComponent from "../../AdminComponent";
+import {useUserLoad} from "../../../hooks/useUserLoad";
 
 function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const navigate = useNavigate();
-    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
     const dispatch = useAppDispatch();
-    const {data: user, error, isLoading, refetch} = userAPI.useFetchUserQuery(null);
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
 
+    useUserLoad(trigger, accessToken);
 
     const profileMenuItems = [
         {
@@ -55,6 +57,7 @@ function ProfileMenu() {
     ];
     const logout = () => {
         dispatch(tokenSlice.actions.tokenRemove());
+        dispatch(userAPI.util.resetApiState());
     }
     const toLogin = () => {
         navigate("/login");

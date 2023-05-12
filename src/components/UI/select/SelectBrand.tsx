@@ -12,11 +12,11 @@ import {brandAPI} from "../../../services/BrandService";
 interface SelectBrandProps {
     brands: IBrand[] | undefined;
     changeBrand: (e: IHardware) => void;
-
+    defaultValue?: any;
 }
 
 
-const SelectBrand:FC<SelectBrandProps> = ({brands, changeBrand}) => { // todo replace with SelectWithAdd
+const SelectBrand:FC<SelectBrandProps> = ({brands, changeBrand, defaultValue}) => { // todo replace with SelectWithAdd
 
     const [isAdd, setIsAdd] = useState(true);
 
@@ -47,11 +47,11 @@ const SelectBrand:FC<SelectBrandProps> = ({brands, changeBrand}) => { // todo re
             <div className="w-4/12">
                 <MySelect
                     label="Бренд"
-                    options={brands.map((brand)=> {
+                    options={brands.map((brand) => {
                         return {value: brand, child: brand.name} as IOption;
                     })}
                     onChange={changeBrand}
-
+                    defaultValue={{value: defaultValue?.id, child: defaultValue?.name}}
                 />
             </div>
             <div className="mt-3 mx-3 w-6/12">

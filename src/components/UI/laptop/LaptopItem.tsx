@@ -35,7 +35,8 @@ const LaptopItem:FC<LaptopItemProps> = ({laptop, viewType, className, onClick}) 
                 <div className="flex p-2 text-xl">
                     <div className="w-24">
                         <img
-                            src={laptop.imageUrl ? laptop.imageUrl : imageNotFound}
+                            // src={laptop.imageUrl ? laptop.imageUrl : imageNotFound}
+                            src={imageNotFound}
                             alt="img-blur-shadow"
                             className="h-full"
                         />
@@ -59,11 +60,12 @@ const LaptopItem:FC<LaptopItemProps> = ({laptop, viewType, className, onClick}) 
     return (
         <div className={className}>
             <Card className="w-33">
-                <CardHeader color="blue" className="relative h-56 w-56 mx-auto flex justify-center">
+                <CardHeader color="white" className="relative h-56 w-56 mx-auto flex justify-center">
                     <img
-                        src={laptop.imageUrl ? laptop.imageUrl : imageNotFound}
+                        src={imageNotFound}
+                        // src={laptop.imageUrl ? laptop.imageUrl : imageNotFound}
                         alt="img-blur-shadow"
-                        className="h-full"
+                        className="h-full w-full"
                     />
                 </CardHeader>
                 <CardBody className="text-center">

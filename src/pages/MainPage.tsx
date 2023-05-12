@@ -14,6 +14,9 @@ import MySelect from "../components/UI/select/MySelect";
 import {IOption} from "../models/form/IOption";
 import SelectBrand from "../components/UI/select/SelectBrand";
 import LaptopContainer from "../components/UI/laptop/LaptopContainer";
+import {useAppSelector} from "../hooks/redux";
+import {userAPI} from "../services/UserService";
+import {useUserLoad} from "../hooks/useUserLoad";
 
 const sortList = [
     {
@@ -55,6 +58,10 @@ const MainPage = () => {
     const {data: hardwareTypes} = typesAPI.useFetchTypesQuery(types.hardwareType);
     const {data: hardwareList} = hardwareAPI.useFetchAllHardwareQuery(null);
     const [checkedHardwareList, setCheckedHardwareList] = useState<string[]>([]);
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
+
+    useUserLoad(trigger, accessToken);
 
     const [totalPage, setTotalPages] = useState(0);
     const [size, setSize] = useState(12);
@@ -271,8 +278,6 @@ const MainPage = () => {
                     {/*<div ref={lastElement} style={{height:20, background: 'red'}}/>*/}
                 </div>
             </div>
-
-
 
         </div>
     );

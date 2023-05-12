@@ -4,6 +4,8 @@ import {userAPI} from "../../../services/UserService";
 import PostReview from "./PostReview";
 import AuthorizedComponent from "../../AuthorizedComponent";
 import {reviewAPI} from "../../../services/ReviewService";
+import {useAppSelector} from "../../../hooks/redux";
+import {useUserLoad} from "../../../hooks/useUserLoad";
 
 interface ReviewContainerProps {
     laptopId: number;
@@ -12,14 +14,15 @@ interface ReviewContainerProps {
 const ReviewContainer:FC<ReviewContainerProps> = ({laptopId}) => {
 
     const {data: reviews} = reviewAPI.useFetchLaptopReviewsQuery(laptopId);
-    const {data: userinfo} = userAPI.useFetchUserQuery(null);
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    const [trigger, {data: userinfo, error, isLoading}] = userAPI.useLazyFetchUserQuery();
     const [hasReview, setHasReview] = useState(false);
 
     const [text, setText] = useState("");
     const [score, setScore] = useState(1);
     const [reviewId, setReviewId] = useState(0);
 
-
+    useUserLoad(trigger, accessToken);
     useEffect(() => {
 
         if(reviews && userinfo){

@@ -9,17 +9,20 @@ interface MySelectProps {
     onChange: (e: any) => void;
     className?: string | undefined;
     variant?: variant | undefined;
+    defaultValue?: IOption | undefined;
 }
 type variant = "standard" | "outlined" | "static";
 
 
-const MySelect:FC<MySelectProps> = ({label, options, onChange, className,variant}) => {
+const MySelect:FC<MySelectProps> = ({label, options, onChange, className,variant, defaultValue}) => {
+
+
     return (
         <div className={"mt-3 " + className}>
-            <Select variant={variant} label={label} onChange={onChange}>
+            <Select variant={variant} label={`${label} (${defaultValue?.child})`} onChange={onChange}>
                 {
                     options.map((val) => (
-                        <Option key={val.child} value={val.value}>{val.child}</Option>
+                        <Option  key={val.child} value={val.value}>{val.child}</Option>
                     ))
                 }
             </Select>

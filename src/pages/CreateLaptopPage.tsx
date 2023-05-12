@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import UploadAndDisplayImage from "../components/UI/image/UploadAndDisplayImage";
 import {IInput} from "../models/form/IInput";
 import FormInput from "../components/UI/input/FormInput";
@@ -22,11 +22,14 @@ type ICreateLaptopValue = {
     [key: string]: string;
 }
 
+
 const CreateLaptopPage = () => {
+    const [isCreating, setIsCreating] = useState(true);
+
 
     const navigate = useNavigate();
-
     const [selectedImage, setSelectedImage] = useState(null);
+
 
 
     const [values, setValues] = useState({

@@ -58,10 +58,10 @@ export const laptopAPI = createApi({
             }),
         }),
         createLaptop: build.mutation<ILaptop, ICreateLaptop>({
-            query: (brand) => ({
+            query: (laptop) => ({
                 url: `/laptops/create`,
                 method: 'POST',
-                body: brand
+                body: laptop
             }),
             invalidatesTags: ['Laptop']
         }),
@@ -69,6 +69,14 @@ export const laptopAPI = createApi({
             query: (id) => ({
                 url: `/laptops/${id}`,
                 method: 'DELETE',
+            }),
+            invalidatesTags: ['Laptop']
+        }),
+        updateLaptop: build.mutation<ILaptop, { laptop: ICreateLaptop, id: number }>({
+            query: ({laptop, id}) => ({
+                url: `/laptops/${id}`,
+                method: 'PUT',
+                body: laptop
             }),
             invalidatesTags: ['Laptop']
         }),

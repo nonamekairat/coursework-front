@@ -11,8 +11,9 @@ import ShopLocation from "../location/Location";
 import UserLocation from "../location/UserLocation";
 import {userAPI} from "../../../services/UserService";
 import {orderAPI} from "../../../services/OrderService";
-import {useAppDispatch} from "../../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {cartSlice} from "../../../store/reducers/CartSlice";
+import {useUserLoad} from "../../../hooks/useUserLoad";
 
 interface CartOrderProps {
     laptops: ILaptop[];
@@ -25,11 +26,12 @@ const CartOrder:FC<CartOrderProps> = ({laptops}) => {
     const [deliveryType, setDeliveryType] = useState("");
     const dispatch = useAppDispatch();
     // const [address, setAddress] = useState("");
-    const {data: user} = userAPI.useFetchUserQuery(null);
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
     const {data: paymentTypes} = typesAPI.useFetchTypesQuery(types.paymentType);
     const {data: deliveryTypes} = typesAPI.useFetchTypesQuery(types.deliveryType);
     const [orderLaptops, {}] = orderAPI.useMakeOrderMutation();
-
+    useUserLoad(trigger, accessToken);
     useEffect(() => {
         setTotalPrice(getTotalPrice(laptops));
     }, [])

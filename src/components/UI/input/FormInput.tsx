@@ -15,6 +15,7 @@ const FormInput:FC<FormInputProps> = ({onChange, errorMessage, inputProps, class
         <div className={className}>
             <Input
                 {...inputProps}
+
                 onChange={onChange}
                 size="lg"
             />

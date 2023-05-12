@@ -9,6 +9,7 @@ import {userAPI} from "../services/UserService";
 import {IAuthenticate} from "../models/user/IAuthenticate";
 import {tokenSlice} from "../store/reducers/TokenSlice";
 import {IToken} from "../models/IToken";
+import {useUserLoad} from "../hooks/useUserLoad";
 
 
 type IAuthenticateValue = {
@@ -47,6 +48,10 @@ const Login = () => {
 
     const dispatch = useAppDispatch();
     const [authenticate] = userAPI.useAuthenticateUserMutation();
+    // const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    // const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
+    //
+    // useUserLoad(trigger, accessToken);
 
     const sendLoginRequest = async (e: any) => {
         e.preventDefault()
@@ -54,6 +59,7 @@ const Login = () => {
         await authenticate(values as unknown as IAuthenticate).unwrap()
             .then((token: IToken) => {
                 dispatch(tokenSlice.actions.tokenSet(token))
+                // trigger(null);
                 navigate("/")
             }
             ).catch((response:any) => {

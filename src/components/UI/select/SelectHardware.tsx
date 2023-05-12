@@ -13,11 +13,12 @@ interface SelectHardwareProps {
     hardwareType: string;
     hardwareList: IHardware[] | undefined;
     changeHardware: (e: IHardware) => void;
-
+    defaultValue?: IHardware;
 }
 
 
-const SelectHardware:FC<SelectHardwareProps> = ({hardwareType, hardwareList, changeHardware}) => { //todo create hardwareType enum
+const SelectHardware:FC<SelectHardwareProps> = ({hardwareType, hardwareList, changeHardware, defaultValue}) => {
+    //todo create hardwareType enum
 
     const [isAdd, setIsAdd] = useState(true);
 
@@ -45,12 +46,14 @@ const SelectHardware:FC<SelectHardwareProps> = ({hardwareType, hardwareList, cha
     }
 
 
+
     if(hardwareList){
         const hardwareListByHardwareType = hardwareList.filter((h) => h.hardwareType == hardwareType);
         return <div className="flex items-center">
-            <div className="w-4/12">
+            <div className="w-5/12">
                 <MySelect
                     label={hardwareType}
+                    defaultValue={{value: defaultValue?.id, child: defaultValue?.name}}
                     options={hardwareListByHardwareType.map((hardware)=> {
                         return {value: hardware, child: hardware.name} as IOption;
                     })}

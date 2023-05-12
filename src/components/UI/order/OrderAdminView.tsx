@@ -84,24 +84,24 @@ const OrderAdminView:FC<OrderViewAdminProps> = ({isLast, order
                 {isChanging ?
                     <div className="flex space-x-2 justify-end">
 
-                        <Tooltip content="подтвердить действие">
+                        {/*<Tooltip content="подтвердить действие">*/}
                             <IconButton onClick={changeOrderHandle} variant="text" color="blue-gray">
                                 <CheckIcon className="h-4 w-4" />
                             </IconButton>
-                        </Tooltip>
-                        <Tooltip content="отменить действие">
+                        {/*</Tooltip>*/}
+                        {/*<Tooltip content="отменить действие">*/}
                             <IconButton onClick={changeButton} variant="text" color="blue-gray">
                                 <XMarkIcon className="h-4 w-4" />
                             </IconButton>
-                        </Tooltip>
+                        {/*</Tooltip>*/}
                     </div> :
                     <div className="flex space-x-2 justify-end">
 
-                        <Tooltip content="Редактировать">
+                        {/*<Tooltip content="Редактировать">*/}
                             <IconButton onClick={changeButton} variant="text" color="blue-gray">
                                 <PencilIcon className="h-4 w-4" />
                             </IconButton>
-                        </Tooltip>
+                        {/*</Tooltip>*/}
                         <Tooltip content="Ноутбуки">
                             <IconButton onClick={handleOpen} variant="text" color="blue-gray">
                                 <ArrowTopRightOnSquareIcon className="h-4 w-4" />

@@ -74,8 +74,8 @@ const NotificationContainer:FC<NotificationContainerProps> = ({}) => {
             <div className="flex flex-col space-y-2">
 
                 {notifications && notifications.map(notification =>
-                    <MenuItem>
-                        <NotificationItem key={notification.id} notification={notification}/>
+                    <MenuItem key={notification.id}>
+                        <NotificationItem notification={notification}/>
                     </MenuItem>
 
                 )}

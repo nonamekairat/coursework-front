@@ -3,12 +3,17 @@ import {userAPI} from "../services/UserService";
 import UserInformation from "../components/UI/profile/UserInformation";
 import ProfileMenu from "../components/UI/profile/ProfileMenu";
 import {useLocation} from "react-router-dom";
+import {useAppSelector} from "../hooks/redux";
+import {useUserLoad} from "../hooks/useUserLoad";
 
 
 const ProfilePage = () => {
 
-    const {data: user, error, isLoading, refetch} = userAPI.useFetchUserQuery(null);
-    // const {item} = useParams();
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
+
+    useUserLoad(trigger, accessToken);
+
     const location = useLocation();
     let item = location.state.item;
 

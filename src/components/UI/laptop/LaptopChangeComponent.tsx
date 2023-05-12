@@ -4,6 +4,7 @@ import {ILaptop} from "../../../models/ILaptop";
 import {laptopAPI} from "../../../services/LaptopService";
 import {XMarkIcon} from "@heroicons/react/24/solid";
 import AdminComponent from "../../AdminComponent";
+import {useNavigate} from "react-router-dom";
 
 interface LaptopChangeComponentProps {
     laptop: ILaptop;
@@ -13,13 +14,13 @@ interface LaptopChangeComponentProps {
 const LaptopChangeComponent:FC<LaptopChangeComponentProps> = ({laptop}) => {
 
     const [deleteLaptop] = laptopAPI.useDeleteLaptopMutation();
-
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleOpen = () => setOpen(!open);
 
     const changeHandle = () => {
-        // todo: create component to change
+        navigate(`/laptops/${laptop.id}/update`)
     }
 
     const deleteHandle = () => {

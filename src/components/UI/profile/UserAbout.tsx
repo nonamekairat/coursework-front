@@ -1,10 +1,15 @@
 import React from 'react';
 import {userAPI} from "../../../services/UserService";
+import {useAppSelector} from "../../../hooks/redux";
+import {useUserLoad} from "../../../hooks/useUserLoad";
 
 
 const UserAbout = () => {
 
-    const {data: user} = userAPI.useFetchUserQuery(null);
+    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
+    const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
+
+    useUserLoad(trigger, accessToken);
 
     if(!user) return <div>Пользователь не найден</div>
     return (
