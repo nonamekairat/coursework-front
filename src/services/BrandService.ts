@@ -1,11 +1,8 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {API_URL} from "../util/Constants";
-import {RootState} from "../store/store";
 import {IBrand, IBrandRequest} from "../models/ILaptop";
-import {baseApi} from "./BaseApi";
+import {baseAPI} from "./BaseAPI";
 
 
-export const brandAPI = baseApi.injectEndpoints({
+export const brandAPI = baseAPI.injectEndpoints({
 
     endpoints: (build) => ({
 

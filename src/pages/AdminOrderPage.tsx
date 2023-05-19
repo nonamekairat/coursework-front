@@ -3,8 +3,8 @@ import {orderAPI} from "../services/OrderService";
 import MessagePage from "./MessagePage";
 import {Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/outline";
-import OrderView from "../components/UI/order/OrderView";
-import OrderAdminView from "../components/UI/order/OrderAdminView";
+import OrderView from "../components/order/OrderView";
+import OrderAdminView from "../components/order/OrderAdminView";
 
 const TABLE_HEAD = ["Статус", "Общая сумма", "Дата заказа", "Дата обновления", "Тип доставки", "Тип оплаты", ""];
 

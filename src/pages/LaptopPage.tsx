@@ -6,13 +6,16 @@ import {laptopAPI} from "../services/LaptopService";
 import NotFoundPage from "./NotFoundPage";
 import {getModel, hardwareTypeList} from "../util/Functions";
 import imageNotFound from "../assets/image-not-found.png";
-import AddToFavoriteButton from "../components/UI/button/AddToFavoriteButton";
+import AddToFavoriteButton from "../components/button/AddToFavoriteButton";
 import {favoriteAPI} from "../services/FavoriteService";
-import ReviewContainer from "../components/UI/review/ReviewContainer";
+import ReviewContainer from "../components/review/ReviewContainer";
 import AuthorizedComponent from "../components/AuthorizedComponent";
-import OrderComponent from "../components/UI/order/OrderComponent";
+import OrderComponent from "../components/order/OrderComponent";
 import {Rating} from "react-simple-star-rating";
-import LaptopChangeComponent from "../components/UI/laptop/LaptopChangeComponent";
+import LaptopChangeComponent from "../components/laptop/LaptopChangeComponent";
+import LaptopContainer from "../components/laptop/LaptopContainer";
+import {IPageable} from "../models/IPageable";
+import PaginationList from "../components/pagination/PaginationList";
 
 
 const LaptopPage = () => {
@@ -26,6 +29,23 @@ const LaptopPage = () => {
     const {data: favorites} = favoriteAPI.useFetchFavoritesQuery(null);
     const [addFavorite, {}] = favoriteAPI.useAddFavoriteMutation();
     const [deleteFavorite, {}] = favoriteAPI.useDeleteFavoriteMutation();
+
+    const [totalPage, setTotalPages] = useState(0);
+    const [size, setSize] = useState(3);
+    const [page, setPage] = useState(1);
+    const [sort, setSort] = useState("price");
+    const [sortType, setSortType] = useState("asc");
+
+    const {data: recommendations, isLoading: isLaptopsLoading, refetch} = laptopAPI.useFetchLaptopRecommendationsByIdQuery(
+        {
+            id: id,
+            pageable:
+                {
+                    page: page - 1,
+                    size:size,
+                    sort:[`${sort},${sortType}`]
+                }
+        });
 
     useEffect(() => {
 
@@ -75,7 +95,9 @@ const LaptopPage = () => {
 
     return (
         <div className="px-3 mx-auto">
-            <div className="my-3"><Link to="/">back to laptops</Link></div>
+            <div className="my-3">
+                <Link to="/">back to laptops</Link>
+            </div>
             <div className="flex mt-10">
                 <div className="w-9/12">
                     <div className="font-semibold text-xl">
@@ -197,6 +219,23 @@ const LaptopPage = () => {
                 </div>
 
             </div>
+
+            <div className="mt-28 px-8">
+                <div className="text-2xl mb-8">
+                    Похожие модели ноутбука
+                </div>
+                {recommendations &&
+                    <React.Fragment>
+                        <LaptopContainer laptops={recommendations.content} />
+                        <div className="mt-6">
+                            <PaginationList total={recommendations.totalPages} active={page} setActive={setPage} />
+                        </div>
+                    </React.Fragment>
+
+                }
+
+            </div>
+
 
             <div className="mt-28">
                 <ReviewContainer laptopId={laptop.id}/>

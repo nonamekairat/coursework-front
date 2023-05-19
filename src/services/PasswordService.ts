@@ -1,24 +1,8 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {API_URL} from "../util/Constants";
-import {RootState} from "../store/store";
-import {IOrder, IOrderChangeStatusRequest, IOrderRequest} from "../models/IOrder";
+import {IOrder} from "../models/IOrder";
+import {baseAPI} from "./BaseAPI";
 
 
-export const passwordAPI = createApi({
-    reducerPath: "passwordAPI",
-    baseQuery: fetchBaseQuery(
-        {
-            baseUrl: API_URL + "/api",
-            prepareHeaders: (headers, {getState}) => {
-                const token = (getState() as RootState).tokenReducer.accessToken;
-                if (token) {
-                    headers.set('Authorization', `Bearer ${token}`)
-                }
-                return headers
-            },
-        }),
-    tagTypes: ['Password'],
-
+export const passwordAPI = baseAPI.injectEndpoints({
 
     endpoints: (build) => ({
 

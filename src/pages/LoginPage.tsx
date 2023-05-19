@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
 import {Alert, Card, CardBody, CardFooter, CardHeader, Checkbox, Typography,} from "@material-tailwind/react";
-import FormInput from "../components/UI/input/FormInput";
-import MyButton from "../components/UI/button/MyButton";
+import FormInput from "../components/input/FormInput";
+import MyButton from "../components/button/MyButton";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {userAPI} from "../services/UserService";
 import {IAuthenticate} from "../models/user/IAuthenticate";

@@ -1,5 +1,5 @@
 import React from "react";
-import FavoriteLaptopsContainer from "../components/UI/laptop/FavoriteLaptopsContainer";
+import FavoriteLaptopsContainer from "../components/laptop/FavoriteLaptopsContainer";
 
 
 const FavoritesPage = () => {

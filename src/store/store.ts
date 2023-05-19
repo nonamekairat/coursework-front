@@ -13,7 +13,8 @@ import {FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE,} from
 import storage from 'redux-persist/lib/storage'
 import {orderAPI} from "../services/OrderService";
 import {notificationAPI} from "../services/NotificationService";
-import {passwordAPI} from "../services/PasswordService"; // defaults to localStorage for web
+import {passwordAPI} from "../services/PasswordService";
+import {baseAPI} from "../services/BaseAPI"; // defaults to localStorage for web
 
 
 const rootReducer = combineReducers({
@@ -48,17 +49,8 @@ export const setupStore = () => {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         })
-            .concat(userAPI.middleware)
-            .concat(brandAPI.middleware)
-            .concat(hardwareAPI.middleware)
-            .concat(laptopAPI.middleware)
-            .concat(imageAPI.middleware)
-            .concat(favoriteAPI.middleware)
-            .concat(reviewAPI.middleware)
-            .concat(orderAPI.middleware)
-            .concat(notificationAPI.middleware)
-            .concat(passwordAPI.middleware)
-            .concat(typesAPI.middleware),
+            .concat(baseAPI.middleware)
+
     })
 }
 

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useAppSelector} from "../hooks/redux";
-import LaptopInCart from "../components/UI/laptop/LaptopInCart";
+import LaptopInCart from "../components/laptop/LaptopInCart";
 import {ICartLaptop, ILaptop} from "../models/ILaptop";
 import MessagePage from "./MessagePage";
-import CartOrder from "../components/UI/order/CartOrder";
+import CartOrder from "../components/order/CartOrder";
 
 
 const CartPage = () => {

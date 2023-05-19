@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, Card, CardBody, CardFooter, CardHeader, Checkbox, Input, Typography} from "@material-tailwind/react";
-import FormInput from "../components/UI/input/FormInput";
-import MyButton from "../components/UI/button/MyButton";
+import FormInput from "../components/input/FormInput";
+import MyButton from "../components/button/MyButton";
 import {Link, useNavigate} from "react-router-dom";
 import {userAPI} from "../services/UserService";
 

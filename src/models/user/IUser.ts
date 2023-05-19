@@ -1,11 +1,5 @@
-export interface IUser {
+export interface IUser extends IBaseUser{
 
-    email: string;
-    username: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    address: string;
     imageUrl: string;
     role: Role;
 }
@@ -13,4 +7,17 @@ export interface IUser {
 export enum Role {
     ROLE_USER = "ROLE_USER",
     ROLE_ADMIN = "ROLE_ADMIN"
+}
+
+export interface IBaseUser {
+    email: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    address: string;
+}
+
+export interface IUpdateUser extends IBaseUser {
+
 }

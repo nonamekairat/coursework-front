@@ -1,28 +1,9 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {API_URL} from "../util/Constants";
-import {RootState} from "../store/store";
 import {ICreateLaptop, ILaptop, IPageLaptop} from "../models/ILaptop";
 import {IPageable} from "../models/IPageable";
+import {baseAPI} from "./BaseAPI";
 
 
-export const laptopAPI = createApi({
-    reducerPath: "laptopAPI",
-    baseQuery: fetchBaseQuery(
-        {
-            baseUrl: API_URL + "/api",
-            prepareHeaders: (headers, {getState}) => {
-                const token = (getState() as RootState).tokenReducer.accessToken;
-                // const {token} = useAppSelector(state => state.tokenReducer)
-                // If we have a token set in state, let's assume that we should be passing it.
-                if (token) {
-                    headers.set('Authorization', `Bearer ${token}`)
-
-                }
-
-                return headers
-            },
-        }),
-    tagTypes: ['Laptop'],
+export const laptopAPI = baseAPI.injectEndpoints({
 
     endpoints: (build) => ({
 
@@ -33,10 +14,43 @@ export const laptopAPI = createApi({
             }),
             providesTags: result => ['Laptop']
         }),
+        fetchAllLaptopsWithFilter: build.query<IPageLaptop,
+            {brand: string, category: string, hardwareList: string[], pageable: IPageable}>({
+            query: (args) => ({
+                url: `/laptops/filter`,
+                method: 'GET',
+                params: args
+            }),
+            providesTags: result => ['Laptop']
+        }),
+        fetchAllLaptopsFilterByCategoryAndBrand: build.query<IPageLaptop,
+            {brandName: string, category: string, pageable: IPageable}>({
+            query: ({brandName, category, pageable}) => ({
+                url: `/laptops/filter`,
+                method: 'GET',
+                params: {
+                    brandName: brandName,
+                    category: category,
+                    page: pageable.page,
+                    size: pageable.size,
+                    sort: pageable.sort
+                }
+
+            }),
+            providesTags: result => ['Laptop']
+        }),
         fetchLaptopById: build.query<ILaptop, number>({
             query: (id) => ({
                 url: `/laptops/${id}`,
                 method: 'GET'
+            }),
+            providesTags: result => ['Laptop']
+        }),
+        fetchLaptopRecommendationsById: build.query<IPageLaptop, {id: number, pageable: IPageable}>({
+            query: ({id, pageable}) => ({
+                url: `/laptops/recommendations/${id}`,
+                method: 'GET',
+                params: pageable
             }),
             providesTags: result => ['Laptop']
         }),
@@ -63,7 +77,7 @@ export const laptopAPI = createApi({
                 method: 'POST',
                 body: laptop
             }),
-            invalidatesTags: ['Laptop']
+            invalidatesTags: ['Laptop', 'Notification']
         }),
         deleteLaptop: build.mutation<string, number>({
             query: (id) => ({
@@ -78,7 +92,7 @@ export const laptopAPI = createApi({
                 method: 'PUT',
                 body: laptop
             }),
-            invalidatesTags: ['Laptop']
+            invalidatesTags: ['Laptop', 'Notification']
         }),
 
 

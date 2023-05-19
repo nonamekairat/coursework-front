@@ -1,31 +1,11 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {API_URL} from "../util/Constants";
 import {IToken} from "../models/IToken";
 import {IRegister} from "../models/user/IRegister";
 import {IAuthenticate} from "../models/user/IAuthenticate";
-import {IUser} from "../models/user/IUser";
-import {RootState} from "../store/store";
-import {IOrder} from "../models/IOrder";
+import {IUpdateUser, IUser} from "../models/user/IUser";
+import {baseAPI} from "./BaseAPI";
 
 
-export const userAPI = createApi({
-    reducerPath: "userAPI",
-    baseQuery: fetchBaseQuery(
-        {
-            baseUrl: API_URL + "/api",
-            prepareHeaders: (headers, {getState}) => {
-                const token = (getState() as RootState).tokenReducer.accessToken;
-                // console.log(token);
-                // const {token} = useAppSelector(state => state.tokenReducer)
-                // If we have a token set in state, let's assume that we should be passing it.
-                if (token) {
-                    headers.set('Authorization', `Bearer ${token}`)
-                }
-                // console.log(headers);
-                return headers
-            },
-        }),
-    tagTypes: ['User'],
+export const userAPI = baseAPI.injectEndpoints({
 
     endpoints: (build) => ({
 
@@ -59,6 +39,22 @@ export const userAPI = createApi({
                 method: 'GET'
             }),
             providesTags: result => ['User']
+        }),
+        changeInfo: build.mutation<IUser, IUpdateUser>({
+            query: (user) => ({
+                url: `/users/changeInfo`,
+                method: 'PUT',
+                body: user
+            }),
+            invalidatesTags: ['User']
+        }),
+        registerAdmin: build.mutation<string, IRegister>({
+            query: (user) => ({
+                url: `/users/addAdmin`,
+                method: 'POST',
+                body: user
+            }),
+            invalidatesTags: ['User']
         }),
     })
 })

@@ -3,17 +3,17 @@ import {laptopAPI} from "../services/LaptopService";
 import {typesAPI} from "../services/TypesService";
 import {types} from "../util/Constants";
 import {hardwareAPI} from "../services/HardwareService";
-import HardwareTypeAccordion from "../components/UI/accordion/HardwareTypeAccordion";
-import StandartButton from "../components/UI/button/StandartButton";
+import HardwareTypeAccordion from "../components/accordion/HardwareTypeAccordion";
+import StandartButton from "../components/button/StandartButton";
 import {IHardware, ILaptop} from "../models/ILaptop";
 import {IPageable} from "../models/IPageable";
-import LaptopItem from "../components/UI/laptop/LaptopItem";
-import PaginationList from "../components/UI/pagination/PaginationList";
+import LaptopItem from "../components/laptop/LaptopItem";
+import PaginationList from "../components/pagination/PaginationList";
 import {brandAPI} from "../services/BrandService";
-import MySelect from "../components/UI/select/MySelect";
+import MySelect from "../components/select/MySelect";
 import {IOption} from "../models/form/IOption";
-import SelectBrand from "../components/UI/select/SelectBrand";
-import LaptopContainer from "../components/UI/laptop/LaptopContainer";
+import SelectBrand from "../components/select/SelectBrand";
+import LaptopContainer from "../components/laptop/LaptopContainer";
 import {useAppSelector} from "../hooks/redux";
 import {userAPI} from "../services/UserService";
 import {useUserLoad} from "../hooks/useUserLoad";
@@ -58,10 +58,12 @@ const MainPage = () => {
     const {data: hardwareTypes} = typesAPI.useFetchTypesQuery(types.hardwareType);
     const {data: hardwareList} = hardwareAPI.useFetchAllHardwareQuery(null);
     const [checkedHardwareList, setCheckedHardwareList] = useState<string[]>([]);
-    const {accessToken: accessToken} = useAppSelector(state => state.tokenReducer)
-    const [trigger, {data: user, error, isLoading}] = userAPI.useLazyFetchUserQuery();
 
-    useUserLoad(trigger, accessToken);
+    const {data: categories} = typesAPI.useFetchTypesQuery(types.category);
+    const {data: brands} = brandAPI.useFetchBrandsQuery(null);
+
+    const [category, setCategory] = useState("all");
+    const [brand, setBrand] = useState<IHardware>({hardwareType: "", id: 0, name: "all"});
 
     const [totalPage, setTotalPages] = useState(0);
     const [size, setSize] = useState(12);
@@ -69,13 +71,47 @@ const MainPage = () => {
     const [sort, setSort] = useState("id");
     const [sortType, setSortType] = useState("asc");
 
-    const {data: pageLaptop, isLoading: isLaptopsLoading, refetch} = laptopAPI.useFetchAllPaginationLaptopsQuery({
-        page: page - 1,
-        size: size,
-        sort: [
-            `${sort},${sortType}`
-        ]
-    } as IPageable);
+    // const {data: pageLaptop, isLoading: isLaptopsLoading, refetch} = laptopAPI.useFetchAllPaginationLaptopsQuery({
+    //     page: page - 1,
+    //     size: size,
+    //     sort: [
+    //         `${sort},${sortType}`
+    //     ]
+    // } as IPageable);
+
+    const {data: pageLaptop, isLoading: isLaptopsLoading, refetch} =
+        laptopAPI.useFetchAllLaptopsFilterByCategoryAndBrandQuery(
+        {
+            pageable: {
+                page: page - 1,
+                size: size,
+                sort: [
+                    `${sort},${sortType}`
+                ]
+            },
+            category: category,
+            brandName: brand.name,
+
+        }
+    )
+
+
+
+    // const {data: pageLaptop, isLoading: isLaptopsLoading, refetch} = laptopAPI.useFetchAllLaptopsWithFilterQuery(
+    //     {
+    //         pageable: {
+    //             page: page - 1,
+    //             size: size,
+    //             sort: [
+    //                 `${sort},${sortType}`
+    //             ]
+    //         },
+    //         category: category,
+    //         brand: brand.name,
+    //         hardwareList: checkedHardwareList
+    //
+    //     });
+
 
 
 
@@ -93,16 +129,15 @@ const MainPage = () => {
             setTotalPages(pageLaptop.totalPages);
             setLocalLaptops(pageLaptop.content);
         }
-        if(checkedHardwareList.length !== 0){
-            filterLaptops();
-        }
         // console.log(pageLaptop?.content)
     }, [pageLaptop])
 
     // useEffect(() => {
     //     // console.log(localLaptops);
     // }, [localLaptops])
-
+    const filterLaptops = () => {
+        refetch();
+    }
 
     const selectHardware = (e: any) => {
         const checked = e.target.checked;
@@ -134,26 +169,6 @@ const MainPage = () => {
         return false;
     }
 
-    const filterLaptops = () => {
-        if(checkedHardwareList.length === 0) return;
-        let newLaptops: ILaptop[] = [];
-        if(pageLaptop){
-            for (let i = 0; i < checkedHardwareList.length; i++) {
-                for (let j = 0; j < pageLaptop.content.length; j++) {
-                    if(haveHardware(pageLaptop.content[j], checkedHardwareList[i]) && !newLaptops.includes(pageLaptop.content[j])){
-                        newLaptops = [...newLaptops, pageLaptop.content[j]];
-                    }
-                }
-            }
-        }
-        setLocalLaptops(newLaptops);
-    }
-
-    const {data: categories} = typesAPI.useFetchTypesQuery(types.category);
-    const {data: brands} = brandAPI.useFetchBrandsQuery(null);
-
-    const [category, setCategory] = useState("");
-    const [brand, setBrand] = useState<IHardware>({hardwareType: "", id: 0, name: ""});
 
 
     const changeBrand = (e: any) => {
@@ -174,15 +189,6 @@ const MainPage = () => {
         // console.log(e);
         setSortType(e);
     }
-
-
-
-
-
-
-
-
-
 
 
     return (

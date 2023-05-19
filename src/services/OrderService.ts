@@ -1,26 +1,8 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {API_URL} from "../util/Constants";
-import {RootState} from "../store/store";
 import {IOrder, IOrderChangeStatusRequest, IOrderRequest} from "../models/IOrder";
+import {baseAPI} from "./BaseAPI";
 
 
-export const orderAPI = createApi({
-    reducerPath: "orderAPI",
-    baseQuery: fetchBaseQuery(
-        {
-            baseUrl: API_URL + "/api",
-            prepareHeaders: (headers, {getState}) => {
-                const token = (getState() as RootState).tokenReducer.accessToken;
-                // const {token} = useAppSelector(state => state.tokenReducer)
-                // If we have a token set in state, let's assume that we should be passing it.
-                if (token) {
-                    headers.set('Authorization', `Bearer ${token}`)
-                }
-                return headers
-            },
-        }),
-    tagTypes: ['Order'],
-
+export const orderAPI = baseAPI.injectEndpoints({
 
     endpoints: (build) => ({
 
@@ -44,21 +26,21 @@ export const orderAPI = createApi({
                 method: 'POST',
                 body: order
             }),
-            invalidatesTags: ['Order']
+            invalidatesTags: ['Order', 'Notification']
         }),
         deleteOrder: build.mutation<string, number>({
             query: (id) => ({
                 url: `/orders/${id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['Order']
+            invalidatesTags: ['Order', 'Notification']
         }),
         cancelOrder: build.mutation<string, number>({
             query: (id) => ({
                 url: `/orders/cancelOrder/${id}`,
                 method: 'PUT',
             }),
-            invalidatesTags: ['Order']
+            invalidatesTags: ['Order', 'Notification']
         }),
         changeStatus: build.mutation<string, IOrderChangeStatusRequest>({
             query: (request) => ({
@@ -66,7 +48,7 @@ export const orderAPI = createApi({
                 method: 'PUT',
                 params: request.params
             }),
-            invalidatesTags: ['Order']
+            invalidatesTags: ['Order', 'Notification']
         }),
     })
 })

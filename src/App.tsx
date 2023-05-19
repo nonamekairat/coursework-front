@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import MyNavbar from "./components/UI/navbar/MyNavbar";
+import MyNavbar from "./components/navbar/MyNavbar";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProfileChangePage from "./pages/ProfileChangePage";
@@ -16,6 +16,7 @@ import AdminOrderPage from "./pages/AdminOrderPage";
 import ActivatePasswordPage from "./pages/ActivatePasswordPage";
 import UpdateLaptopPage from "./pages/update-laptop/UpdateLaptopPage";
 import PresentLaptop from "./pages/update-laptop/PresentLaptop";
+import CreateAdminPage from "./pages/CreateAdminPage";
 
 const App = () => {
 
@@ -38,6 +39,7 @@ const App = () => {
               <Route path={'/profile'} element={<ProfilePage/>}/>
               <Route path={'/profile/change'} element={<ProfileChangePage/>}/>
               <Route path={'/laptop/create'} element={<CreateLaptopPage/>}/>
+              <Route path={'/admin/create'} element={<CreateAdminPage/>}/>
               <Route path={'/login'} element={<LoginPage/>}/>
               <Route path="*" element={<MessagePage/>}/>
           </Routes>

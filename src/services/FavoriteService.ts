@@ -1,25 +1,8 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {API_URL} from "../util/Constants";
-import {RootState} from "../store/store";
 import {IFavorite, IFavoriteRequest} from "../models/ILaptop";
+import {baseAPI} from "./BaseAPI";
 
 
-export const favoriteAPI = createApi({
-    reducerPath: "favoriteAPI",
-    baseQuery: fetchBaseQuery(
-        {
-            baseUrl: API_URL + "/api",
-            prepareHeaders: (headers, {getState}) => {
-                const token = (getState() as RootState).tokenReducer.accessToken;
-                // const {token} = useAppSelector(state => state.tokenReducer)
-                // If we have a token set in state, let's assume that we should be passing it.
-                if (token) {
-                    headers.set('Authorization', `Bearer ${token}`)
-                }
-                return headers
-            },
-        }),
-    tagTypes: ['Favorite'],
+export const favoriteAPI = baseAPI.injectEndpoints({
 
     endpoints: (build) => ({
 
