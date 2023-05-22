@@ -17,6 +17,9 @@ import ActivatePasswordPage from "./pages/ActivatePasswordPage";
 import UpdateLaptopPage from "./pages/update-laptop/UpdateLaptopPage";
 import PresentLaptop from "./pages/update-laptop/PresentLaptop";
 import CreateAdminPage from "./pages/CreateAdminPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import TokenPasswordPage from "./pages/TokenPasswordPage";
 
 const App = () => {
 
@@ -33,6 +36,9 @@ const App = () => {
               <Route path={'/'} element={<MainPage/>}/>
               <Route path={'/cart'} element={<CartPage/>}/>
               <Route path={'/password/activate'} element={<ActivatePasswordPage/>}/>
+              <Route path={'/password/forgot'} element={<ForgotPasswordPage/>}/>
+              <Route path={'/password/token'} element={<TokenPasswordPage/>}/>
+              <Route path={'/password/reset/:token'} key="/password/reset/:token" element={<ResetPasswordPage/>}/>
               <Route path={'/favorites'} element={<FavoritesPage/>}/>
               <Route path={'/laptops/:id'} key="'/laptops/:id" element={<LaptopPage />}/>
               <Route path={'/laptops/:id/update'} key="'/laptops/:id/update" element={<PresentLaptop />}/>

@@ -2,40 +2,18 @@ import React, {useState} from 'react';
 import {Alert, Card, CardBody, CardFooter, CardHeader, Input, Typography} from "@material-tailwind/react";
 import MyButton from "../components/button/MyButton";
 import {Link, useNavigate} from "react-router-dom";
-import {userAPI} from "../services/UserService";
 
-const ActivatePasswordPage = () => {
+const TokenPasswordPage = () => {
 
     const [isError, setIsError] = useState(false);
     const [token, setToken] = useState("");
     const navigate = useNavigate();
-    const [activate, {isError: apiError}] = userAPI.useActivatePasswordMutation();
 
 
     const confirmHandle = (e: any) => {
         e.preventDefault();
-        activate(token)
-        if(apiError){
-            setIsError(true)
-            return;
-        }
-        navigate("/login");
-
-        //     .unwrap().then(response => {
-        //     setIsError(false)
-        //     navigate("/login")
-        // }).catch(response => {
-        //     setIsError(true)
-        // });
+        navigate(`/password/reset/${token}`)
     }
-    // useEffect(() => {
-    //     if(apiError){
-    //         setIsError(true)
-    //     }else {
-    //         setIsError(false)
-    //         navigate("/login")
-    //     }
-    // }, [activate])
     const onChange = (e: any) => {
         setToken(e.target.value);
     }
@@ -58,12 +36,11 @@ const ActivatePasswordPage = () => {
                     <Alert
                         open={isError}
                         color="red"
-                    >Не правильный токен</Alert>
+                    >Токен не найден</Alert>
                     <Input label="Токен" value={token} onChange={onChange} />
 
                 </CardBody>
                 <CardFooter className="pt-0">
-                    {/* <MyButton id="submit" type="button" onClick={sendLoginRequest}>Login</MyButton> */}
                     <MyButton variant="gradient" onClick={confirmHandle} fullWidth>
                         отправить
                     </MyButton>
@@ -84,4 +61,4 @@ const ActivatePasswordPage = () => {
     );
 };
 
-export default ActivatePasswordPage;
+export default TokenPasswordPage;
